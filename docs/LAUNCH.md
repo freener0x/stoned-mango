@@ -137,7 +137,7 @@ This puts everything into the main version, and the Deploy workflow publishes it
 
 ## Step 10: Final checks on the live site
 
-1. Open the real address (for example `https://stoned-mango.pages.dev`) on your phone and your computer.
+1. Open the real address, https://stonedmango.com (or `https://stoned-mango.pages.dev`), on your phone and your computer.
 2. Analyse a song, open **Privacy**, **Accuracy** and **Donate**, and check **Source code** opens the GitHub page.
 3. On a computer, the privacy check anyone can do: open the browser's developer tools → **Network** tab → analyse a song. Nothing is sent anywhere.
 4. Share the link.
@@ -148,5 +148,5 @@ This puts everything into the main version, and the Deploy workflow publishes it
 
 - **Changes:** I work on a branch. Every change gets its own preview link to try first, and goes live when it's merged into main (step 9 again, or "merge it").
 - **PC scripts:** the download link and steps in the [Windows guide](phase2/TRAINING-ON-WINDOWS.md#getting-the-latest-version-whenever-i-change-the-scripts) keep working.
-- **A custom domain** can be added any time: Cloudflare → **Workers & Pages** → **stoned-mango** → **Custom domains**.
+- **The custom domain:** https://stonedmango.com (and `www.`), bought from Cloudflare and added under **Workers & Pages** → **stoned-mango** → **Custom domains**. The `pages.dev` address keeps working too.
 - **Taxes:** depending on where you live, donations may count as income. Worth checking.

@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig, type Plugin } from 'vite';
 import { donateModule } from './build/donate.ts';
 import { headersFile, headersFor, parseHeaders } from './build/headers.ts';
+import { thirdPartyLicenses } from './build/licenses.ts';
 
 /** virtual:donate: the Donate page's links and QR codes, made from donate.json at build time. */
 function donate(): Plugin {
@@ -51,6 +52,31 @@ function securityHeaders(): Plugin {
         for (const [name, value] of headersFor(path, rules)) res.setHeader(name, value);
         next();
       });
+    },
+  };
+}
+
+// The modules bundled into the analysis worker (its build finishes before the page's bundle is written)
+const workerModules = new Set<string>();
+
+function collectWorkerModules(): Plugin {
+  return {
+    name: 'stoned-mango-worker-modules',
+    generateBundle(_, bundle) {
+      for (const chunk of Object.values(bundle)) if (chunk.type === 'chunk') for (const id of chunk.moduleIds) workerModules.add(id);
+    },
+  };
+}
+
+/** Writes dist/third-party-licenses.txt (web/build/licenses.ts) for the packages the page and the worker ship. */
+function licenses(): Plugin {
+  return {
+    name: 'stoned-mango-licenses',
+    apply: 'build',
+    generateBundle(_, bundle) {
+      const ids = new Set(workerModules);
+      for (const chunk of Object.values(bundle)) if (chunk.type === 'chunk') for (const id of chunk.moduleIds) ids.add(id);
+      this.emitFile({ type: 'asset', fileName: 'third-party-licenses.txt', source: thirdPartyLicenses(ids) });
     },
   };
 }
@@ -104,8 +130,8 @@ function precache(): Plugin {
 }
 
 export default defineConfig(({ mode }) => ({
-  plugins: [react(), donate(), precache(), securityHeaders()],
-  worker: { format: 'es' },
+  plugins: [react(), donate(), licenses(), precache(), securityHeaders()],
+  worker: { format: 'es', plugins: () => [collectWorkerModules()] },
   build: {
     target: 'es2022',
     rollupOptions: {

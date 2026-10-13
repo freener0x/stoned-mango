@@ -24,7 +24,9 @@ export function AboutPage({ offline }: { offline: boolean }) {
 
       <h2>Free and open source</h2>
       <p>Licensed under the GNU AGPL 3.0 or later; the key model under CC BY-SA 4.0. Anyone can read the code, check these promises
-        and run their own copy: <a href="https://github.com/freener0x/stoned-mango" rel="noreferrer">source code</a>.</p>
+        and run their own copy: <a href="https://github.com/freener0x/stoned-mango" rel="noreferrer">source code</a>. It includes
+        open-source libraries under their own licences: <a href={`${import.meta.env.BASE_URL}third-party-licenses.txt`}>third-party
+        licences</a>.</p>
     </main>
   );
 }

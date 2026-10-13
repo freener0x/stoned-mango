@@ -3,6 +3,8 @@
 A free, open-source musical key and mode reader that runs entirely in your
 browser. Your music never leaves your device.
 
+**Use it:** https://stonedmango.com
+
 - **Plan:** [PLAN.md](PLAN.md)
 - **Phase 0 (spike + licence audit):** [docs/phase0/REPORT.md](docs/phase0/REPORT.md)
 - **Phase 1 (research core):** [docs/phase1/REPORT.md](docs/phase1/REPORT.md)

@@ -1,0 +1,81 @@
+name: Deploy
+
+# Builds the site from this repository's public source and publishes it to Cloudflare Pages:
+# pushes to main go live; pushes to any other branch get their own preview link (handy for
+# testing on a phone). It needs two repository secrets, CLOUDFLARE_API_TOKEN and
+# CLOUDFLARE_ACCOUNT_ID (how to make them: docs/phase7/REPORT.md). Until they exist, the
+# workflow stops after a one-line notice.
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Cloudflare credentials
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - id: check
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$TOKEN" ] && [ -n "$ACCOUNT" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Not published: add the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets to publish the site."
+          fi
+
+  deploy:
+    name: Build and publish
+    needs: check
+    if: needs.check.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      PROJECT: ${{ vars.CLOUDFLARE_PROJECT || 'stoned-mango' }}
+      WRANGLER: wrangler@4.148.0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      # Secrets pasted into GitHub's form can carry a stray space or line break, which Cloudflare
+      # rejects ("Invalid account ID"), so both are trimmed before use. Wrangler's messages go
+      # through `hide`: after a login error it prints the account's email address, and this
+      # repository's logs are public.
+      - name: Create the Pages project (first time only)
+        run: |
+          set -o pipefail
+          hide() { sed -E 's/[[:alnum:]._%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,}/<email hidden>/g'; }
+          export CLOUDFLARE_ACCOUNT_ID="$(printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | tr -d '[:space:]')"
+          export CLOUDFLARE_API_TOKEN="$(printf '%s' "$CLOUDFLARE_API_TOKEN" | tr -d '[:space:]')"
+          projects="$(npx --yes "$WRANGLER" pages project list 2>&1)" || { printf '%s\n' "$projects" | hide; exit 1; }
+          if ! grep -qw "$PROJECT" <<< "$projects"; then
+            npx --yes "$WRANGLER" pages project create "$PROJECT" --production-branch=main 2>&1 | hide
+          fi
+      - name: Publish
+        run: |
+          set -o pipefail
+          hide() { sed -E 's/[[:alnum:]._%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,}/<email hidden>/g'; }
+          export CLOUDFLARE_ACCOUNT_ID="$(printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | tr -d '[:space:]')"
+          export CLOUDFLARE_API_TOKEN="$(printf '%s' "$CLOUDFLARE_API_TOKEN" | tr -d '[:space:]')"
+          npx --yes "$WRANGLER" pages deploy dist --project-name="$PROJECT" --branch="$GITHUB_REF_NAME" --commit-hash="$GITHUB_SHA" 2>&1 | hide

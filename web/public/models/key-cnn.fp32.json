@@ -1,0 +1,106 @@
+{
+ "format": 1,
+ "license": "CC-BY-SA-4.0",
+ "inputs": {
+  "name": "spec",
+  "shape": [
+   "batch",
+   1,
+   "frames",
+   105
+  ],
+  "transform": "log1p(triangular log-frequency filterbank @ |STFT|)",
+  "bands": 105,
+  "fmin_hz": 65.406,
+  "bands_per_octave": 24,
+  "frame_size": 4096,
+  "hop_size": 2048,
+  "window": "blackmanharris62 (normalized)",
+  "sample_rate": "input halved until <= 32 kHz (22.05 kHz for 44.1 kHz audio)"
+ },
+ "outputs": {
+  "name": "logits",
+  "shape": [
+   "batch",
+   "12 * scales",
+   "frames / 4"
+  ],
+  "index": "scale_index * 12 + tonic (tonic 0 = C); song logits = mean over frames, then softmax",
+  "scales": [
+   "ionian",
+   "dorian",
+   "phrygian",
+   "lydian",
+   "mixolydian",
+   "aeolian",
+   "locrian",
+   "harmonic_minor",
+   "locrian_nat6",
+   "ionian_augmented",
+   "dorian_sharp4",
+   "phrygian_dominant",
+   "lydian_sharp2",
+   "ultralocrian",
+   "melodic_minor",
+   "dorian_b2",
+   "lydian_augmented",
+   "lydian_dominant",
+   "mixolydian_b6",
+   "locrian_nat2",
+   "altered",
+   "major_pentatonic",
+   "minor_pentatonic",
+   "blues",
+   "major_blues",
+   "whole_tone",
+   "diminished_hw",
+   "diminished_wh",
+   "double_harmonic",
+   "hungarian_minor"
+  ],
+  "time_downsample": 4
+ },
+ "architecture": {
+  "width": 16,
+  "dense": 64,
+  "dropout": 0.3,
+  "max_tier": 2
+ },
+ "training": {
+  "epoch": 14,
+  "validation": {
+   "synthetic:synthetic": {
+    "key24": 0.7289,
+    "tonic": 0.7478,
+    "mode": 0.6378,
+    "n": 900
+   },
+   "real:beatport": {
+    "key24": 0.6992,
+    "tonic": 0.782,
+    "mode": null,
+    "n": 133
+   }
+  },
+  "args": {
+   "synthetic": "[PosixPath('~/stoned-mango-data/cache/synthetic')]",
+   "real": "[PosixPath('~/stoned-mango-data/cache/beatport')]",
+   "out": "~/stoned-mango-data/runs/20260930-0139",
+   "epochs": "60",
+   "batch": "64",
+   "length": "256",
+   "lr": "0.002",
+   "width": "16",
+   "dense": "64",
+   "max_shift": "6",
+   "real_weight": "3",
+   "val_fraction": "0.1",
+   "patience": "8",
+   "seed": "0",
+   "device": "cuda"
+  }
+ },
+ "onnx_vs_torch_max_abs_diff": 2.09808349609375e-05,
+ "int8_top1_agreement_with_fp32": 1.0,
+ "bytes": 306299
+}

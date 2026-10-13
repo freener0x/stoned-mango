@@ -1,0 +1,777 @@
+{
+ "dataset": "synthetic",
+ "n": 180,
+ "overall": {
+  "template_bass0": {
+   "weighted": 0.669,
+   "mm_exact": 0.622,
+   "tonic": 0.65,
+   "mode": 0.439,
+   "notes": 0.672,
+   "n": 180
+  },
+  "template_bass0.3": {
+   "weighted": 0.765,
+   "mm_exact": 0.728,
+   "tonic": 0.767,
+   "mode": 0.528,
+   "notes": 0.689,
+   "n": 180
+  },
+  "essentia_edma": {
+   "weighted": 0.498,
+   "mm_exact": 0.439,
+   "tonic": 0.494,
+   "mode": 0.05,
+   "notes": 0.111,
+   "n": 180
+  },
+  "essentia_bgate": {
+   "weighted": 0.498,
+   "mm_exact": 0.444,
+   "tonic": 0.5,
+   "mode": 0.05,
+   "notes": 0.1,
+   "n": 180
+  },
+  "essentia_temperley": {
+   "weighted": 0.511,
+   "mm_exact": 0.444,
+   "tonic": 0.5,
+   "mode": 0.05,
+   "notes": 0.128,
+   "n": 180
+  },
+  "essentia_krumhansl": {
+   "weighted": 0.513,
+   "mm_exact": 0.45,
+   "tonic": 0.506,
+   "mode": 0.05,
+   "notes": 0.117,
+   "n": 180
+  },
+  "keyextractor_edma": {
+   "weighted": 0.652,
+   "mm_exact": 0.617,
+   "tonic": 0.667,
+   "mode": 0.05,
+   "notes": 0.078,
+   "n": 180
+  },
+  "keyextractor_temperley": {
+   "weighted": 0.449,
+   "mm_exact": 0.344,
+   "tonic": 0.378,
+   "mode": 0.039,
+   "notes": 0.161,
+   "n": 180
+  }
+ },
+ "by_family": {
+  "diatonic": {
+   "template_bass0": {
+    "weighted": 0.767,
+    "mm_exact": 0.667,
+    "tonic": 0.667,
+    "mode": 0.548,
+    "notes": 0.738,
+    "n": 42
+   },
+   "template_bass0.3": {
+    "weighted": 0.767,
+    "mm_exact": 0.667,
+    "tonic": 0.667,
+    "mode": 0.548,
+    "notes": 0.762,
+    "n": 42
+   },
+   "essentia_edma": {
+    "weighted": 0.636,
+    "mm_exact": 0.595,
+    "tonic": 0.595,
+    "mode": 0.214,
+    "notes": 0.476,
+    "n": 42
+   },
+   "essentia_bgate": {
+    "weighted": 0.64,
+    "mm_exact": 0.619,
+    "tonic": 0.619,
+    "mode": 0.214,
+    "notes": 0.429,
+    "n": 42
+   },
+   "essentia_temperley": {
+    "weighted": 0.624,
+    "mm_exact": 0.571,
+    "tonic": 0.571,
+    "mode": 0.214,
+    "notes": 0.548,
+    "n": 42
+   },
+   "essentia_krumhansl": {
+    "weighted": 0.624,
+    "mm_exact": 0.571,
+    "tonic": 0.571,
+    "mode": 0.214,
+    "notes": 0.5,
+    "n": 42
+   },
+   "keyextractor_edma": {
+    "weighted": 0.752,
+    "mm_exact": 0.69,
+    "tonic": 0.69,
+    "mode": 0.214,
+    "notes": 0.333,
+    "n": 42
+   },
+   "keyextractor_temperley": {
+    "weighted": 0.457,
+    "mm_exact": 0.357,
+    "tonic": 0.357,
+    "mode": 0.167,
+    "notes": 0.69,
+    "n": 42
+   }
+  },
+  "harmonic_minor": {
+   "template_bass0": {
+    "weighted": 0.474,
+    "mm_exact": 0.452,
+    "tonic": 0.5,
+    "mode": 0.31,
+    "notes": 0.69,
+    "n": 42
+   },
+   "template_bass0.3": {
+    "weighted": 0.664,
+    "mm_exact": 0.643,
+    "tonic": 0.714,
+    "mode": 0.5,
+    "notes": 0.714,
+    "n": 42
+   },
+   "essentia_edma": {
+    "weighted": 0.264,
+    "mm_exact": 0.167,
+    "tonic": 0.262,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "essentia_bgate": {
+    "weighted": 0.26,
+    "mm_exact": 0.167,
+    "tonic": 0.262,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "essentia_temperley": {
+    "weighted": 0.29,
+    "mm_exact": 0.167,
+    "tonic": 0.262,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "essentia_krumhansl": {
+    "weighted": 0.295,
+    "mm_exact": 0.19,
+    "tonic": 0.286,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "keyextractor_edma": {
+    "weighted": 0.414,
+    "mm_exact": 0.381,
+    "tonic": 0.476,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "keyextractor_temperley": {
+    "weighted": 0.283,
+    "mm_exact": 0.167,
+    "tonic": 0.238,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   }
+  },
+  "melodic_minor": {
+   "template_bass0": {
+    "weighted": 0.655,
+    "mm_exact": 0.643,
+    "tonic": 0.643,
+    "mode": 0.405,
+    "notes": 0.714,
+    "n": 42
+   },
+   "template_bass0.3": {
+    "weighted": 0.726,
+    "mm_exact": 0.714,
+    "tonic": 0.714,
+    "mode": 0.476,
+    "notes": 0.69,
+    "n": 42
+   },
+   "essentia_edma": {
+    "weighted": 0.464,
+    "mm_exact": 0.429,
+    "tonic": 0.429,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "essentia_bgate": {
+    "weighted": 0.488,
+    "mm_exact": 0.452,
+    "tonic": 0.452,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "essentia_temperley": {
+    "weighted": 0.481,
+    "mm_exact": 0.452,
+    "tonic": 0.452,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "essentia_krumhansl": {
+    "weighted": 0.464,
+    "mm_exact": 0.429,
+    "tonic": 0.429,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "keyextractor_edma": {
+    "weighted": 0.643,
+    "mm_exact": 0.643,
+    "tonic": 0.643,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   },
+   "keyextractor_temperley": {
+    "weighted": 0.412,
+    "mm_exact": 0.357,
+    "tonic": 0.357,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 42
+   }
+  },
+  "pentatonic": {
+   "template_bass0": {
+    "weighted": 0.9,
+    "mm_exact": 0.833,
+    "tonic": 0.833,
+    "mode": 0.833,
+    "notes": 0.917,
+    "n": 12
+   },
+   "template_bass0.3": {
+    "weighted": 0.942,
+    "mm_exact": 0.917,
+    "tonic": 0.917,
+    "mode": 0.917,
+    "notes": 1.0,
+    "n": 12
+   },
+   "essentia_edma": {
+    "weighted": 0.825,
+    "mm_exact": 0.75,
+    "tonic": 0.75,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_bgate": {
+    "weighted": 0.825,
+    "mm_exact": 0.75,
+    "tonic": 0.75,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_temperley": {
+    "weighted": 0.825,
+    "mm_exact": 0.75,
+    "tonic": 0.75,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_krumhansl": {
+    "weighted": 0.825,
+    "mm_exact": 0.75,
+    "tonic": 0.75,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "keyextractor_edma": {
+    "weighted": 0.842,
+    "mm_exact": 0.75,
+    "tonic": 0.75,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "keyextractor_temperley": {
+    "weighted": 0.667,
+    "mm_exact": 0.5,
+    "tonic": 0.5,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   }
+  },
+  "blues": {
+   "template_bass0": {
+    "weighted": 0.883,
+    "mm_exact": 0.833,
+    "tonic": 0.833,
+    "mode": 0.167,
+    "notes": 0.167,
+    "n": 12
+   },
+   "template_bass0.3": {
+    "weighted": 1.0,
+    "mm_exact": 1.0,
+    "tonic": 1.0,
+    "mode": 0.167,
+    "notes": 0.167,
+    "n": 12
+   },
+   "essentia_edma": {
+    "weighted": 0.825,
+    "mm_exact": 0.75,
+    "tonic": 0.75,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_bgate": {
+    "weighted": 0.742,
+    "mm_exact": 0.667,
+    "tonic": 0.667,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_temperley": {
+    "weighted": 0.825,
+    "mm_exact": 0.75,
+    "tonic": 0.75,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_krumhansl": {
+    "weighted": 0.825,
+    "mm_exact": 0.75,
+    "tonic": 0.75,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "keyextractor_edma": {
+    "weighted": 1.0,
+    "mm_exact": 1.0,
+    "tonic": 1.0,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "keyextractor_temperley": {
+    "weighted": 0.708,
+    "mm_exact": 0.583,
+    "tonic": 0.583,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   }
+  },
+  "symmetric": {
+   "template_bass0": {
+    "weighted": 0.506,
+    "mm_exact": 0.444,
+    "tonic": 0.611,
+    "mode": 0.222,
+    "notes": 0.389,
+    "n": 18
+   },
+   "template_bass0.3": {
+    "weighted": 0.656,
+    "mm_exact": 0.611,
+    "tonic": 0.833,
+    "mode": 0.333,
+    "notes": 0.389,
+    "n": 18
+   },
+   "essentia_edma": {
+    "weighted": 0.139,
+    "mm_exact": 0.056,
+    "tonic": 0.389,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 18
+   },
+   "essentia_bgate": {
+    "weighted": 0.139,
+    "mm_exact": 0.056,
+    "tonic": 0.389,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 18
+   },
+   "essentia_temperley": {
+    "weighted": 0.194,
+    "mm_exact": 0.111,
+    "tonic": 0.444,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 18
+   },
+   "essentia_krumhansl": {
+    "weighted": 0.25,
+    "mm_exact": 0.167,
+    "tonic": 0.5,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 18
+   },
+   "keyextractor_edma": {
+    "weighted": 0.461,
+    "mm_exact": 0.389,
+    "tonic": 0.667,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 18
+   },
+   "keyextractor_temperley": {
+    "weighted": 0.217,
+    "mm_exact": 0.0,
+    "tonic": 0.167,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 18
+   }
+  },
+  "double_harmonic": {
+   "template_bass0": {
+    "weighted": 0.858,
+    "mm_exact": 0.833,
+    "tonic": 0.833,
+    "mode": 0.833,
+    "notes": 0.917,
+    "n": 12
+   },
+   "template_bass0.3": {
+    "weighted": 1.0,
+    "mm_exact": 1.0,
+    "tonic": 1.0,
+    "mode": 1.0,
+    "notes": 1.0,
+    "n": 12
+   },
+   "essentia_edma": {
+    "weighted": 0.833,
+    "mm_exact": 0.833,
+    "tonic": 0.833,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_bgate": {
+    "weighted": 0.833,
+    "mm_exact": 0.833,
+    "tonic": 0.833,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_temperley": {
+    "weighted": 0.833,
+    "mm_exact": 0.833,
+    "tonic": 0.833,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "essentia_krumhansl": {
+    "weighted": 0.833,
+    "mm_exact": 0.833,
+    "tonic": 0.833,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "keyextractor_edma": {
+    "weighted": 0.917,
+    "mm_exact": 0.917,
+    "tonic": 0.917,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   },
+   "keyextractor_temperley": {
+    "weighted": 1.0,
+    "mm_exact": 1.0,
+    "tonic": 1.0,
+    "mode": 0.0,
+    "notes": 0.0,
+    "n": 12
+   }
+  }
+ },
+ "by_scale": {
+  "ionian": {
+   "weighted": 0.917,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.5,
+   "notes": 0.5,
+   "n": 6
+  },
+  "dorian": {
+   "weighted": 0.8,
+   "mm_exact": 0.667,
+   "tonic": 0.667,
+   "mode": 0.5,
+   "notes": 0.833,
+   "n": 6
+  },
+  "phrygian": {
+   "weighted": 0.883,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.833,
+   "notes": 1.0,
+   "n": 6
+  },
+  "lydian": {
+   "weighted": 0.75,
+   "mm_exact": 0.667,
+   "tonic": 0.667,
+   "mode": 0.667,
+   "notes": 1.0,
+   "n": 6
+  },
+  "mixolydian": {
+   "weighted": 0.5,
+   "mm_exact": 0.5,
+   "tonic": 0.5,
+   "mode": 0.167,
+   "notes": 0.667,
+   "n": 6
+  },
+  "aeolian": {
+   "weighted": 0.633,
+   "mm_exact": 0.333,
+   "tonic": 0.333,
+   "mode": 0.333,
+   "notes": 0.5,
+   "n": 6
+  },
+  "locrian": {
+   "weighted": 0.883,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.833,
+   "notes": 0.833,
+   "n": 6
+  },
+  "harmonic_minor": {
+   "weighted": 1.0,
+   "mm_exact": 1.0,
+   "tonic": 1.0,
+   "mode": 0.5,
+   "notes": 0.5,
+   "n": 6
+  },
+  "locrian_nat6": {
+   "weighted": 0.5,
+   "mm_exact": 0.5,
+   "tonic": 0.5,
+   "mode": 0.5,
+   "notes": 1.0,
+   "n": 6
+  },
+  "ionian_augmented": {
+   "weighted": 1.0,
+   "mm_exact": 1.0,
+   "tonic": 1.0,
+   "mode": 1.0,
+   "notes": 1.0,
+   "n": 6
+  },
+  "dorian_sharp4": {
+   "weighted": 0.55,
+   "mm_exact": 0.5,
+   "tonic": 0.5,
+   "mode": 0.333,
+   "notes": 0.667,
+   "n": 6
+  },
+  "phrygian_dominant": {
+   "weighted": 0.667,
+   "mm_exact": 0.667,
+   "tonic": 0.667,
+   "mode": 0.5,
+   "notes": 0.833,
+   "n": 6
+  },
+  "lydian_sharp2": {
+   "weighted": 0.267,
+   "mm_exact": 0.167,
+   "tonic": 0.667,
+   "mode": 0.167,
+   "notes": 0.333,
+   "n": 6
+  },
+  "ultralocrian": {
+   "weighted": 0.667,
+   "mm_exact": 0.667,
+   "tonic": 0.667,
+   "mode": 0.5,
+   "notes": 0.667,
+   "n": 6
+  },
+  "melodic_minor": {
+   "weighted": 0.833,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.5,
+   "notes": 0.667,
+   "n": 6
+  },
+  "dorian_b2": {
+   "weighted": 0.75,
+   "mm_exact": 0.667,
+   "tonic": 0.667,
+   "mode": 0.333,
+   "notes": 0.5,
+   "n": 6
+  },
+  "lydian_augmented": {
+   "weighted": 0.833,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.833,
+   "notes": 1.0,
+   "n": 6
+  },
+  "lydian_dominant": {
+   "weighted": 0.833,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.667,
+   "notes": 0.667,
+   "n": 6
+  },
+  "mixolydian_b6": {
+   "weighted": 0.667,
+   "mm_exact": 0.667,
+   "tonic": 0.667,
+   "mode": 0.5,
+   "notes": 0.833,
+   "n": 6
+  },
+  "locrian_nat2": {
+   "weighted": 0.833,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.167,
+   "notes": 0.167,
+   "n": 6
+  },
+  "altered": {
+   "weighted": 0.333,
+   "mm_exact": 0.333,
+   "tonic": 0.333,
+   "mode": 0.333,
+   "notes": 1.0,
+   "n": 6
+  },
+  "major_pentatonic": {
+   "weighted": 1.0,
+   "mm_exact": 1.0,
+   "tonic": 1.0,
+   "mode": 1.0,
+   "notes": 1.0,
+   "n": 6
+  },
+  "minor_pentatonic": {
+   "weighted": 0.883,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.833,
+   "notes": 1.0,
+   "n": 6
+  },
+  "blues": {
+   "weighted": 1.0,
+   "mm_exact": 1.0,
+   "tonic": 1.0,
+   "mode": 0.167,
+   "notes": 0.167,
+   "n": 6
+  },
+  "major_blues": {
+   "weighted": 1.0,
+   "mm_exact": 1.0,
+   "tonic": 1.0,
+   "mode": 0.167,
+   "notes": 0.167,
+   "n": 6
+  },
+  "whole_tone": {
+   "weighted": 0.833,
+   "mm_exact": 0.833,
+   "tonic": 0.833,
+   "mode": 0.833,
+   "notes": 1.0,
+   "n": 6
+  },
+  "diminished_hw": {
+   "weighted": 0.133,
+   "mm_exact": 0.0,
+   "tonic": 0.667,
+   "mode": 0.0,
+   "notes": 0.0,
+   "n": 6
+  },
+  "diminished_wh": {
+   "weighted": 1.0,
+   "mm_exact": 1.0,
+   "tonic": 1.0,
+   "mode": 0.167,
+   "notes": 0.167,
+   "n": 6
+  },
+  "double_harmonic": {
+   "weighted": 1.0,
+   "mm_exact": 1.0,
+   "tonic": 1.0,
+   "mode": 1.0,
+   "notes": 1.0,
+   "n": 6
+  },
+  "hungarian_minor": {
+   "weighted": 1.0,
+   "mm_exact": 1.0,
+   "tonic": 1.0,
+   "mode": 1.0,
+   "notes": 1.0,
+   "n": 6
+  }
+ },
+ "best_engine": "template_bass0.3"
+}

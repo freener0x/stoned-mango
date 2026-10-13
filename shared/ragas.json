@@ -1,0 +1,636 @@
+{
+ "$comment": "Common ragas for the shortlist shown with an Indian result: the notes each uses (semitones above Sa) and its parent scale. A raga is more than its notes, so this is a shortlist, not an answer. Written by `python -m stoned_mango.tier3_data`.",
+ "ragas": [
+  {
+   "name": "Yaman",
+   "tradition": "hindustani",
+   "parent": "mela_65",
+   "notes": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+   ]
+  },
+  {
+   "name": "Bhupali",
+   "tradition": "hindustani",
+   "parent": "mela_29",
+   "notes": [
+    0,
+    2,
+    4,
+    7,
+    9
+   ]
+  },
+  {
+   "name": "Durga",
+   "tradition": "hindustani",
+   "parent": "mela_29",
+   "notes": [
+    0,
+    2,
+    5,
+    7,
+    9
+   ]
+  },
+  {
+   "name": "Bihag",
+   "tradition": "hindustani",
+   "parent": "mela_29",
+   "notes": [
+    0,
+    4,
+    5,
+    6,
+    7,
+    11
+   ]
+  },
+  {
+   "name": "Hamsadhwani",
+   "tradition": "both",
+   "parent": "mela_29",
+   "notes": [
+    0,
+    2,
+    4,
+    7,
+    11
+   ]
+  },
+  {
+   "name": "Desh",
+   "tradition": "hindustani",
+   "parent": "mela_28",
+   "notes": [
+    0,
+    2,
+    5,
+    7,
+    10,
+    11
+   ]
+  },
+  {
+   "name": "Khamaj",
+   "tradition": "hindustani",
+   "parent": "mela_28",
+   "notes": [
+    0,
+    4,
+    5,
+    7,
+    9,
+    10,
+    11
+   ]
+  },
+  {
+   "name": "Kafi",
+   "tradition": "hindustani",
+   "parent": "mela_22",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    9,
+    10
+   ]
+  },
+  {
+   "name": "Bageshree",
+   "tradition": "hindustani",
+   "parent": "mela_22",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    9,
+    10
+   ]
+  },
+  {
+   "name": "Bhimpalasi",
+   "tradition": "hindustani",
+   "parent": "mela_22",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    9,
+    10
+   ]
+  },
+  {
+   "name": "Malkauns",
+   "tradition": "hindustani",
+   "parent": "mela_20",
+   "notes": [
+    0,
+    3,
+    5,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Darbari Kanada",
+   "tradition": "hindustani",
+   "parent": "mela_20",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Jaunpuri",
+   "tradition": "hindustani",
+   "parent": "mela_20",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Bhairavi",
+   "tradition": "hindustani",
+   "parent": "mela_8",
+   "notes": [
+    0,
+    1,
+    3,
+    5,
+    7,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Bhairav",
+   "tradition": "hindustani",
+   "parent": "mela_15",
+   "notes": [
+    0,
+    1,
+    4,
+    5,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Ahir Bhairav",
+   "tradition": "hindustani",
+   "parent": "mela_14",
+   "notes": [
+    0,
+    1,
+    4,
+    5,
+    7,
+    9,
+    10
+   ]
+  },
+  {
+   "name": "Todi",
+   "tradition": "hindustani",
+   "parent": "mela_45",
+   "notes": [
+    0,
+    1,
+    3,
+    6,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Multani",
+   "tradition": "hindustani",
+   "parent": "mela_45",
+   "notes": [
+    0,
+    1,
+    3,
+    6,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Puriya Dhanashri",
+   "tradition": "hindustani",
+   "parent": "mela_51",
+   "notes": [
+    0,
+    1,
+    4,
+    6,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Shree",
+   "tradition": "hindustani",
+   "parent": "mela_51",
+   "notes": [
+    0,
+    1,
+    4,
+    6,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Marwa",
+   "tradition": "hindustani",
+   "parent": "mela_53",
+   "notes": [
+    0,
+    1,
+    4,
+    6,
+    9,
+    11
+   ]
+  },
+  {
+   "name": "Sohini",
+   "tradition": "hindustani",
+   "parent": "mela_53",
+   "notes": [
+    0,
+    1,
+    4,
+    6,
+    9,
+    11
+   ]
+  },
+  {
+   "name": "Puriya",
+   "tradition": "hindustani",
+   "parent": "mela_53",
+   "notes": [
+    0,
+    1,
+    4,
+    6,
+    9,
+    11
+   ]
+  },
+  {
+   "name": "Kirwani",
+   "tradition": "hindustani",
+   "parent": "mela_21",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Kalyani",
+   "tradition": "carnatic",
+   "parent": "mela_65",
+   "notes": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+   ]
+  },
+  {
+   "name": "Shankarabharanam",
+   "tradition": "carnatic",
+   "parent": "mela_29",
+   "notes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+   ]
+  },
+  {
+   "name": "Mohanam",
+   "tradition": "carnatic",
+   "parent": "mela_28",
+   "notes": [
+    0,
+    2,
+    4,
+    7,
+    9
+   ]
+  },
+  {
+   "name": "Bilahari",
+   "tradition": "carnatic",
+   "parent": "mela_29",
+   "notes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+   ]
+  },
+  {
+   "name": "Kambhoji",
+   "tradition": "carnatic",
+   "parent": "mela_28",
+   "notes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10,
+    11
+   ]
+  },
+  {
+   "name": "Kharaharapriya",
+   "tradition": "carnatic",
+   "parent": "mela_22",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    9,
+    10
+   ]
+  },
+  {
+   "name": "Abhogi",
+   "tradition": "carnatic",
+   "parent": "mela_22",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    9
+   ]
+  },
+  {
+   "name": "Sriranjani",
+   "tradition": "carnatic",
+   "parent": "mela_22",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    9,
+    10
+   ]
+  },
+  {
+   "name": "Madhyamavati",
+   "tradition": "carnatic",
+   "parent": "mela_22",
+   "notes": [
+    0,
+    2,
+    5,
+    7,
+    10
+   ]
+  },
+  {
+   "name": "Shivaranjani",
+   "tradition": "both",
+   "parent": "mela_22",
+   "notes": [
+    0,
+    2,
+    3,
+    7,
+    9
+   ]
+  },
+  {
+   "name": "Hindolam",
+   "tradition": "carnatic",
+   "parent": "mela_20",
+   "notes": [
+    0,
+    3,
+    5,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Natabhairavi",
+   "tradition": "carnatic",
+   "parent": "mela_20",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Thodi",
+   "tradition": "carnatic",
+   "parent": "mela_8",
+   "notes": [
+    0,
+    1,
+    3,
+    5,
+    7,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Mayamalavagowla",
+   "tradition": "carnatic",
+   "parent": "mela_15",
+   "notes": [
+    0,
+    1,
+    4,
+    5,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Revati",
+   "tradition": "carnatic",
+   "parent": "mela_2",
+   "notes": [
+    0,
+    1,
+    5,
+    7,
+    10
+   ]
+  },
+  {
+   "name": "Keeravani",
+   "tradition": "carnatic",
+   "parent": "mela_21",
+   "notes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Charukesi",
+   "tradition": "carnatic",
+   "parent": "mela_26",
+   "notes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Shanmukhapriya",
+   "tradition": "carnatic",
+   "parent": "mela_56",
+   "notes": [
+    0,
+    2,
+    3,
+    6,
+    7,
+    8,
+    10
+   ]
+  },
+  {
+   "name": "Simhendramadhyamam",
+   "tradition": "carnatic",
+   "parent": "mela_57",
+   "notes": [
+    0,
+    2,
+    3,
+    6,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Hemavati",
+   "tradition": "carnatic",
+   "parent": "mela_58",
+   "notes": [
+    0,
+    2,
+    3,
+    6,
+    7,
+    9,
+    10
+   ]
+  },
+  {
+   "name": "Pantuvarali",
+   "tradition": "carnatic",
+   "parent": "mela_51",
+   "notes": [
+    0,
+    1,
+    4,
+    6,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Saveri",
+   "tradition": "carnatic",
+   "parent": "mela_15",
+   "notes": [
+    0,
+    1,
+    4,
+    5,
+    7,
+    8,
+    11
+   ]
+  },
+  {
+   "name": "Kalyana Vasantham",
+   "tradition": "carnatic",
+   "parent": "mela_21",
+   "notes": [
+    0,
+    3,
+    5,
+    7,
+    8,
+    11
+   ]
+  }
+ ]
+}

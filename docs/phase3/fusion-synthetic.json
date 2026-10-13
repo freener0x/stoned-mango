@@ -1,0 +1,29 @@
+{
+ "$comment": "Engine-fusion weights, fitted by `python -m stoned_mango.fusion fit`. See fusion.py.",
+ "format": 1,
+ "features": [
+  "cnn",
+  "template",
+  "bass",
+  "ending",
+  "drone"
+ ],
+ "weights": {
+  "cnn": 1.28266,
+  "template": 2.78217,
+  "bass": 0.09501,
+  "ending": 0.0,
+  "drone": 0.935
+ },
+ "no_key_below": 0.248,
+ "meta": {
+  "fitted_on": {
+   "synthetic:fit": 1200
+  },
+  "model": "key-cnn.fp32.onnx sha256:f403e512e4e4f258",
+  "fit_accuracy": 0.6925,
+  "fit_ece": 0.0207,
+  "keyless_max": 0.1655,
+  "withheld_fraction": 0.0067
+ }
+}

@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable",
+      "DOM.AsyncIterable",
+      "WebWorker"
+    ]
+  },
+  "include": [
+    ".",
+    "../src/engine",
+    "../src/essentia.d.ts",
+    "../src/ui/fs-access.d.ts"
+  ]
+}

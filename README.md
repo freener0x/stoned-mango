@@ -7,7 +7,7 @@ browser. Your music never leaves your device.
 - **Phase 0 (spike + licence audit):** [docs/phase0/REPORT.md](docs/phase0/REPORT.md)
 - **Phase 1 (research core):** [docs/phase1/REPORT.md](docs/phase1/REPORT.md)
 - **Phase 2 (key CNN):** [docs/phase2/REPORT.md](docs/phase2/REPORT.md) · **[Train it on your Windows PC](docs/phase2/TRAINING-ON-WINDOWS.md)**
-- **Download the latest version (ZIP):** https://github.com/freener0x/stoned-mango/archive/refs/heads/claude/audio-key-detection-khkh02.zip (log in to GitHub first). To update an earlier download, see [Getting the latest version](docs/phase2/TRAINING-ON-WINDOWS.md#getting-the-latest-version-whenever-i-change-the-scripts)
+- **Download the latest version (ZIP):** https://github.com/freener0x/stoned-mango/archive/refs/heads/claude/audio-key-detection-khkh02.zip. To update an earlier download, see [Getting the latest version](docs/phase2/TRAINING-ON-WINDOWS.md#getting-the-latest-version-whenever-i-change-the-scripts)
 - **Phase 3 (tonic, fusion, calibration):** [docs/phase3/REPORT.md](docs/phase3/REPORT.md)
 - **Phase 4 (key changes over time):** [docs/phase4/REPORT.md](docs/phase4/REPORT.md)
 - **Phase 5 (the analysis in the browser):** [docs/phase5/REPORT.md](docs/phase5/REPORT.md)

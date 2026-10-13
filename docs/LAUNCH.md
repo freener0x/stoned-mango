@@ -115,6 +115,8 @@ Once a repository is public, its whole history is visible, old versions of pull 
 
 ## Step 8: Make the new repository public
 
+Already done: the new repository was created public. If yours is private:
+
 1. New repository → **Settings** → **General** → scroll down to **Danger Zone**.
 2. **Change repository visibility** → **Change to public** → confirm, typing the repository name when asked.
 

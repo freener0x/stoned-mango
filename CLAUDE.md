@@ -7,7 +7,7 @@ The author doesn't use git. They download the project as a ZIP and double-click 
 after the scripts or code changed, **always include the download link and the re-download steps**, not just the
 script name:
 
-1. Download the ZIP (log in to GitHub first; the repository is private):
+1. Download the ZIP (no login needed; the repository is public):
    https://github.com/freener0x/stoned-mango/archive/refs/heads/claude/audio-key-detection-khkh02.zip
    (If the work moves to another branch, use `https://github.com/freener0x/stoned-mango/archive/refs/heads/<branch>.zip`.)
 2. Right-click the ZIP → Properties → tick Unblock (if it's there) → OK.

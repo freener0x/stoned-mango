@@ -25,7 +25,7 @@ Open the **NVIDIA app** (or GeForce Experience) and install any driver update. I
 
 ## Step 2: Download the project
 
-1. Download this ZIP (log in to GitHub first):
+1. Download this ZIP:
    **https://github.com/freener0x/stoned-mango/archive/refs/heads/claude/audio-key-detection-khkh02.zip**
 2. Before extracting, right-click the ZIP → **Properties** → tick **Unblock** (if it's there) → **OK**. This stops Windows from blocking the scripts inside.
 3. Right-click the ZIP → **Extract All…** and extract it somewhere simple, for example `C:\stoned-mango`.
@@ -34,7 +34,7 @@ Open the **NVIDIA app** (or GeForce Experience) and install any driver update. I
 
 When I've changed something you need to run, download the project again. Your datasets, the trained model and earlier results are kept, so there's no need to run the setup again.
 
-1. **Download the ZIP again** (log in to GitHub first; the project is private):
+1. **Download the ZIP again**:
    **https://github.com/freener0x/stoned-mango/archive/refs/heads/claude/audio-key-detection-khkh02.zip**
 2. Right-click the new ZIP → **Properties** → tick **Unblock** (if it's there) → **OK**.
 3. Right-click the ZIP → **Extract All…** → choose **the same folder as before** (for example `C:\stoned-mango`) → **Extract**.

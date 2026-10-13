@@ -1,0 +1,54 @@
+{
+ "dataset": "giantsteps",
+ "n": 604,
+ "overall": {
+  "template_bass0": {
+   "weighted": 0.537,
+   "mm_exact": 0.424,
+   "tonic": 0.553,
+   "n": 604
+  },
+  "template_bass0.3": {
+   "weighted": 0.559,
+   "mm_exact": 0.464,
+   "tonic": 0.599,
+   "n": 604
+  },
+  "essentia_edma": {
+   "weighted": 0.445,
+   "mm_exact": 0.384,
+   "tonic": 0.435,
+   "n": 604
+  },
+  "essentia_bgate": {
+   "weighted": 0.427,
+   "mm_exact": 0.373,
+   "tonic": 0.419,
+   "n": 604
+  },
+  "essentia_temperley": {
+   "weighted": 0.484,
+   "mm_exact": 0.409,
+   "tonic": 0.46,
+   "n": 604
+  },
+  "essentia_krumhansl": {
+   "weighted": 0.478,
+   "mm_exact": 0.409,
+   "tonic": 0.462,
+   "n": 604
+  },
+  "keyextractor_edma": {
+   "weighted": 0.653,
+   "mm_exact": 0.576,
+   "tonic": 0.692,
+   "n": 604
+  },
+  "keyextractor_temperley": {
+   "weighted": 0.444,
+   "mm_exact": 0.328,
+   "tonic": 0.407,
+   "n": 604
+  }
+ }
+}

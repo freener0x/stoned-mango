@@ -1,0 +1,39 @@
+[project]
+name = "stoned-mango"
+version = "0.0.1"
+description = "Research workbench for stoned-mango: key and mode detection (training, evaluation, CLI)"
+readme = "README.md"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    # 2.1b6.dev1389 is the newest build with wheels for CPython 3.10-3.13 and
+    # the first that works with NumPy 2 (dev1110 crashes on import under NumPy 2).
+    "essentia==2.1b6.dev1389",
+    "numpy>=2,<3",
+    "scipy>=1.13",
+    "soundfile>=0.12",
+    # Runs the trained key CNN (web/public/models/); the CLI falls back to the template engine without it.
+    "onnxruntime>=1.20",
+]
+
+[project.scripts]
+stoned-mango = "stoned_mango.cli:main"
+
+[project.optional-dependencies]
+eval = ["mir_eval>=0.7"]
+dev = ["mir_eval>=0.7", "pytest>=8", "pyflakes>=3", "mido>=1.3", "mutagen>=1.47"]
+# Training the key CNN. Install a CUDA build of torch first (scripts/linux/setup.sh does).
+train = ["torch>=2.4", "mido>=1.3", "onnx>=1.17", "onnxruntime>=1.20", "onnxscript>=0.1", "mir_eval>=0.7", "mutagen>=1.47"]
+spike = [
+    "onnx>=1.17",
+    "onnxruntime>=1.20",
+    # LGPL MP3 encoder, used only to generate test fixtures, never shipped.
+    "lameenc>=1.7",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["stoned_mango*"]

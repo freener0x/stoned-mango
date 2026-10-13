@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>stoned-mango spike</title>
+    <link rel="icon" href="data:," />
+    <style>
+      body { font: 15px/1.5 system-ui, sans-serif; margin: 0 auto; padding: 16px; max-width: 760px; background: #fff; color: #111; }
+      @media (prefers-color-scheme: dark) { body { background: #111; color: #eee; } }
+      fieldset { border: 1px solid #8884; border-radius: 8px; margin-bottom: 12px; }
+      label { display: block; margin: 6px 0; }
+      input[type='text'] { width: 100%; box-sizing: border-box; }
+      button { font: inherit; padding: 8px 14px; margin-right: 8px; }
+      pre { white-space: pre-wrap; word-break: break-word; font-size: 12px; background: #8881; padding: 8px; border-radius: 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>stoned-mango · phase 0 benchmark</h1>
+    <p>Everything runs in this tab. Files are never uploaded.</p>
+    <fieldset>
+      <label>Audio files <input id="files" type="file" accept="audio/*,.mp3,.wav" multiple /></label>
+      <label>Workers <input id="workers" type="number" min="1" max="8" /></label>
+      <label>Model
+        <select id="model"><option value="int8">int8</option><option value="fp32">fp32</option></select>
+      </label>
+      <label>KeyExtractor profiles <input id="profiles" type="text" value="edma,bgate,temperley,krumhansl" /></label>
+      <label><input id="frameLoop" type="checkbox" checked /> Frame loop (HPCP 12/120, tuning, CNN input)</label>
+      <label><input id="cnn" type="checkbox" checked /> Placeholder CNN</label>
+    </fieldset>
+    <button id="run">Run</button><button id="golden">Golden check</button>
+    <pre id="out"></pre>
+    <script type="module" src="/src/spike/main.ts"></script>
+  </body>
+</html>

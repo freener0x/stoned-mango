@@ -1,0 +1,2773 @@
+{
+  "$comment": "Single source of truth for every scale the app knows, shared by research/ (Python) and web/ (TypeScript). Intervals are cents above the tonic so tier 3 (maqam, makam, raga) can use microtonal steps. 'mode_of' says which scale this one is a rotation of, and from which degree; 'label' overrides the display name ('C major' rather than 'C Ionian').",
+  "version": 1,
+  "scales": [
+    {
+      "id": "ionian",
+      "name": "Ionian",
+      "aliases": [
+        "major"
+      ],
+      "family": "diatonic",
+      "tier": 1,
+      "cents": [
+        0,
+        200,
+        400,
+        500,
+        700,
+        900,
+        1100
+      ],
+      "label": "major"
+    },
+    {
+      "id": "dorian",
+      "name": "Dorian",
+      "aliases": [],
+      "family": "diatonic",
+      "tier": 1,
+      "cents": [
+        0,
+        200,
+        300,
+        500,
+        700,
+        900,
+        1000
+      ],
+      "mode_of": {
+        "scale": "ionian",
+        "degree": 2
+      }
+    },
+    {
+      "id": "phrygian",
+      "name": "Phrygian",
+      "aliases": [],
+      "family": "diatonic",
+      "tier": 1,
+      "cents": [
+        0,
+        100,
+        300,
+        500,
+        700,
+        800,
+        1000
+      ],
+      "mode_of": {
+        "scale": "ionian",
+        "degree": 3
+      }
+    },
+    {
+      "id": "lydian",
+      "name": "Lydian",
+      "aliases": [],
+      "family": "diatonic",
+      "tier": 1,
+      "cents": [
+        0,
+        200,
+        400,
+        600,
+        700,
+        900,
+        1100
+      ],
+      "mode_of": {
+        "scale": "ionian",
+        "degree": 4
+      }
+    },
+    {
+      "id": "mixolydian",
+      "name": "Mixolydian",
+      "aliases": [],
+      "family": "diatonic",
+      "tier": 1,
+      "cents": [
+        0,
+        200,
+        400,
+        500,
+        700,
+        900,
+        1000
+      ],
+      "mode_of": {
+        "scale": "ionian",
+        "degree": 5
+      }
+    },
+    {
+      "id": "aeolian",
+      "name": "Aeolian",
+      "aliases": [
+        "minor",
+        "natural minor"
+      ],
+      "family": "diatonic",
+      "tier": 1,
+      "cents": [
+        0,
+        200,
+        300,
+        500,
+        700,
+        800,
+        1000
+      ],
+      "label": "minor",
+      "mode_of": {
+        "scale": "ionian",
+        "degree": 6
+      }
+    },
+    {
+      "id": "locrian",
+      "name": "Locrian",
+      "aliases": [],
+      "family": "diatonic",
+      "tier": 1,
+      "cents": [
+        0,
+        100,
+        300,
+        500,
+        600,
+        800,
+        1000
+      ],
+      "mode_of": {
+        "scale": "ionian",
+        "degree": 7
+      }
+    },
+    {
+      "id": "harmonic_minor",
+      "name": "Harmonic minor",
+      "aliases": [],
+      "family": "harmonic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        300,
+        500,
+        700,
+        800,
+        1100
+      ]
+    },
+    {
+      "id": "locrian_nat6",
+      "name": "Locrian ♮6",
+      "aliases": [],
+      "family": "harmonic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        100,
+        300,
+        500,
+        600,
+        900,
+        1000
+      ],
+      "mode_of": {
+        "scale": "harmonic_minor",
+        "degree": 2
+      }
+    },
+    {
+      "id": "ionian_augmented",
+      "name": "Ionian ♯5",
+      "aliases": [
+        "Ionian augmented"
+      ],
+      "family": "harmonic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        400,
+        500,
+        800,
+        900,
+        1100
+      ],
+      "mode_of": {
+        "scale": "harmonic_minor",
+        "degree": 3
+      }
+    },
+    {
+      "id": "dorian_sharp4",
+      "name": "Dorian ♯4",
+      "aliases": [
+        "Ukrainian Dorian",
+        "Romanian minor"
+      ],
+      "family": "harmonic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        300,
+        600,
+        700,
+        900,
+        1000
+      ],
+      "mode_of": {
+        "scale": "harmonic_minor",
+        "degree": 4
+      }
+    },
+    {
+      "id": "phrygian_dominant",
+      "name": "Phrygian dominant",
+      "aliases": [
+        "Spanish Phrygian",
+        "Freygish",
+        "Hijaz (12-TET approximation)"
+      ],
+      "family": "harmonic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        100,
+        400,
+        500,
+        700,
+        800,
+        1000
+      ],
+      "mode_of": {
+        "scale": "harmonic_minor",
+        "degree": 5
+      }
+    },
+    {
+      "id": "lydian_sharp2",
+      "name": "Lydian ♯2",
+      "aliases": [],
+      "family": "harmonic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        300,
+        400,
+        600,
+        700,
+        900,
+        1100
+      ],
+      "mode_of": {
+        "scale": "harmonic_minor",
+        "degree": 6
+      }
+    },
+    {
+      "id": "ultralocrian",
+      "name": "Ultralocrian",
+      "aliases": [
+        "Altered ♭♭7"
+      ],
+      "family": "harmonic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        100,
+        300,
+        400,
+        600,
+        800,
+        900
+      ],
+      "mode_of": {
+        "scale": "harmonic_minor",
+        "degree": 7
+      }
+    },
+    {
+      "id": "melodic_minor",
+      "name": "Melodic minor",
+      "aliases": [
+        "Jazz minor"
+      ],
+      "family": "melodic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        300,
+        500,
+        700,
+        900,
+        1100
+      ]
+    },
+    {
+      "id": "dorian_b2",
+      "name": "Dorian ♭2",
+      "aliases": [
+        "Phrygian ♮6"
+      ],
+      "family": "melodic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        100,
+        300,
+        500,
+        700,
+        900,
+        1000
+      ],
+      "mode_of": {
+        "scale": "melodic_minor",
+        "degree": 2
+      }
+    },
+    {
+      "id": "lydian_augmented",
+      "name": "Lydian augmented",
+      "aliases": [],
+      "family": "melodic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        400,
+        600,
+        800,
+        900,
+        1100
+      ],
+      "mode_of": {
+        "scale": "melodic_minor",
+        "degree": 3
+      }
+    },
+    {
+      "id": "lydian_dominant",
+      "name": "Lydian dominant",
+      "aliases": [
+        "Overtone",
+        "Acoustic"
+      ],
+      "family": "melodic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        400,
+        600,
+        700,
+        900,
+        1000
+      ],
+      "mode_of": {
+        "scale": "melodic_minor",
+        "degree": 4
+      }
+    },
+    {
+      "id": "mixolydian_b6",
+      "name": "Mixolydian ♭6",
+      "aliases": [
+        "Aeolian dominant",
+        "Hindu"
+      ],
+      "family": "melodic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        400,
+        500,
+        700,
+        800,
+        1000
+      ],
+      "mode_of": {
+        "scale": "melodic_minor",
+        "degree": 5
+      }
+    },
+    {
+      "id": "locrian_nat2",
+      "name": "Locrian ♮2",
+      "aliases": [
+        "Half-diminished"
+      ],
+      "family": "melodic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        300,
+        500,
+        600,
+        800,
+        1000
+      ],
+      "mode_of": {
+        "scale": "melodic_minor",
+        "degree": 6
+      }
+    },
+    {
+      "id": "altered",
+      "name": "Altered",
+      "aliases": [
+        "Super Locrian"
+      ],
+      "family": "melodic_minor",
+      "tier": 2,
+      "cents": [
+        0,
+        100,
+        300,
+        400,
+        600,
+        800,
+        1000
+      ],
+      "mode_of": {
+        "scale": "melodic_minor",
+        "degree": 7
+      }
+    },
+    {
+      "id": "major_pentatonic",
+      "name": "Major pentatonic",
+      "aliases": [],
+      "family": "pentatonic",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        400,
+        700,
+        900
+      ]
+    },
+    {
+      "id": "minor_pentatonic",
+      "name": "Minor pentatonic",
+      "aliases": [],
+      "family": "pentatonic",
+      "tier": 2,
+      "cents": [
+        0,
+        300,
+        500,
+        700,
+        1000
+      ],
+      "mode_of": {
+        "scale": "major_pentatonic",
+        "degree": 5
+      }
+    },
+    {
+      "id": "blues",
+      "name": "Blues",
+      "aliases": [
+        "Minor blues"
+      ],
+      "family": "blues",
+      "tier": 2,
+      "cents": [
+        0,
+        300,
+        500,
+        600,
+        700,
+        1000
+      ]
+    },
+    {
+      "id": "major_blues",
+      "name": "Major blues",
+      "aliases": [],
+      "family": "blues",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        300,
+        400,
+        700,
+        900
+      ]
+    },
+    {
+      "id": "whole_tone",
+      "name": "Whole-tone",
+      "aliases": [],
+      "family": "symmetric",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        400,
+        600,
+        800,
+        1000
+      ],
+      "notes": "Symmetric: every note could be the tonic."
+    },
+    {
+      "id": "diminished_hw",
+      "name": "Diminished (half-whole)",
+      "aliases": [
+        "Dominant diminished",
+        "Octatonic"
+      ],
+      "family": "symmetric",
+      "tier": 2,
+      "cents": [
+        0,
+        100,
+        300,
+        400,
+        600,
+        700,
+        900,
+        1000
+      ],
+      "notes": "Symmetric every 3 semitones."
+    },
+    {
+      "id": "diminished_wh",
+      "name": "Diminished (whole-half)",
+      "aliases": [
+        "Octatonic"
+      ],
+      "family": "symmetric",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        300,
+        500,
+        600,
+        800,
+        900,
+        1100
+      ],
+      "mode_of": {
+        "scale": "diminished_hw",
+        "degree": 2
+      },
+      "notes": "Symmetric every 3 semitones."
+    },
+    {
+      "id": "double_harmonic",
+      "name": "Double harmonic major",
+      "aliases": [
+        "Byzantine",
+        "Arabic (12-TET approximation)"
+      ],
+      "family": "double_harmonic",
+      "tier": 2,
+      "cents": [
+        0,
+        100,
+        400,
+        500,
+        700,
+        800,
+        1100
+      ]
+    },
+    {
+      "id": "hungarian_minor",
+      "name": "Hungarian minor",
+      "aliases": [
+        "Gypsy minor"
+      ],
+      "family": "double_harmonic",
+      "tier": 2,
+      "cents": [
+        0,
+        200,
+        300,
+        600,
+        700,
+        800,
+        1100
+      ],
+      "mode_of": {
+        "scale": "double_harmonic",
+        "degree": 4
+      }
+    },
+    {
+      "id": "maqam_rast",
+      "name": "Rast",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        200,
+        350,
+        500,
+        700,
+        900,
+        1050
+      ],
+      "dominant": 5,
+      "tonic_hint": "C"
+    },
+    {
+      "id": "maqam_bayati",
+      "name": "Bayati",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        150,
+        300,
+        500,
+        700,
+        800,
+        1000
+      ],
+      "dominant": 4,
+      "tonic_hint": "D"
+    },
+    {
+      "id": "maqam_sikah",
+      "name": "Sikah",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        150,
+        350,
+        550,
+        700,
+        850,
+        1050
+      ],
+      "dominant": 3,
+      "tonic_hint": "E half-flat"
+    },
+    {
+      "id": "maqam_hijaz",
+      "name": "Hijaz",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        100,
+        400,
+        500,
+        700,
+        800,
+        1000
+      ],
+      "dominant": 4,
+      "tonic_hint": "D"
+    },
+    {
+      "id": "maqam_saba",
+      "name": "Saba",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        150,
+        300,
+        400,
+        700,
+        800,
+        1000
+      ],
+      "dominant": 3,
+      "tonic_hint": "D"
+    },
+    {
+      "id": "maqam_nahawand",
+      "name": "Nahawand",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        200,
+        300,
+        500,
+        700,
+        800,
+        1100
+      ],
+      "dominant": 5,
+      "tonic_hint": "C"
+    },
+    {
+      "id": "maqam_kurd",
+      "name": "Kurd",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        100,
+        300,
+        500,
+        700,
+        800,
+        1000
+      ],
+      "dominant": 4,
+      "tonic_hint": "D"
+    },
+    {
+      "id": "maqam_ajam",
+      "name": "Ajam",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        200,
+        400,
+        500,
+        700,
+        900,
+        1100
+      ],
+      "dominant": 5,
+      "tonic_hint": "B flat"
+    },
+    {
+      "id": "maqam_huzam",
+      "name": "Huzam",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        150,
+        350,
+        450,
+        750,
+        850,
+        1050
+      ],
+      "dominant": 3,
+      "tonic_hint": "E half-flat"
+    },
+    {
+      "id": "maqam_nikriz",
+      "name": "Nikriz",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        200,
+        300,
+        600,
+        700,
+        900,
+        1000
+      ],
+      "dominant": 5,
+      "tonic_hint": "C"
+    },
+    {
+      "id": "maqam_nawa_athar",
+      "name": "Nawa Athar",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        200,
+        300,
+        600,
+        700,
+        800,
+        1100
+      ],
+      "dominant": 5,
+      "tonic_hint": "C"
+    },
+    {
+      "id": "maqam_hijaz_kar",
+      "name": "Hijaz Kar",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        100,
+        400,
+        500,
+        700,
+        800,
+        1100
+      ],
+      "dominant": 5,
+      "tonic_hint": "C"
+    },
+    {
+      "id": "maqam_suznak",
+      "name": "Suznak",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        200,
+        350,
+        500,
+        700,
+        800,
+        1100
+      ],
+      "dominant": 5,
+      "tonic_hint": "C"
+    },
+    {
+      "id": "maqam_iraq",
+      "name": "Iraq",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        150,
+        350,
+        500,
+        650,
+        850,
+        1050
+      ],
+      "dominant": 3,
+      "tonic_hint": "B half-flat"
+    },
+    {
+      "id": "maqam_bayati_shuri",
+      "name": "Bayati Shuri",
+      "family": "maqam",
+      "tier": 3,
+      "tradition": "arabic",
+      "cents": [
+        0,
+        150,
+        300,
+        500,
+        600,
+        900,
+        1000
+      ],
+      "dominant": 4,
+      "tonic_hint": "D"
+    },
+    {
+      "id": "makam_rast",
+      "name": "Rast",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        203.8,
+        384.9,
+        498.1,
+        701.9,
+        905.7,
+        1086.8
+      ],
+      "commas": [
+        0,
+        9,
+        17,
+        22,
+        31,
+        40,
+        48
+      ],
+      "dominant": 5,
+      "tonic_hint": "G"
+    },
+    {
+      "id": "makam_ussak",
+      "name": "Uşşak",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        181.1,
+        294.3,
+        498.1,
+        701.9,
+        792.5,
+        996.2
+      ],
+      "commas": [
+        0,
+        8,
+        13,
+        22,
+        31,
+        35,
+        44
+      ],
+      "dominant": 4,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_beyati",
+      "name": "Beyati",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        181.1,
+        294.3,
+        498.1,
+        701.9,
+        792.5,
+        996.2
+      ],
+      "commas": [
+        0,
+        8,
+        13,
+        22,
+        31,
+        35,
+        44
+      ],
+      "dominant": 4,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_huseyni",
+      "name": "Hüseyni",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        181.1,
+        294.3,
+        498.1,
+        701.9,
+        883.0,
+        996.2
+      ],
+      "commas": [
+        0,
+        8,
+        13,
+        22,
+        31,
+        39,
+        44
+      ],
+      "dominant": 5,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_muhayyer",
+      "name": "Muhayyer",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        181.1,
+        294.3,
+        498.1,
+        701.9,
+        883.0,
+        996.2
+      ],
+      "commas": [
+        0,
+        8,
+        13,
+        22,
+        31,
+        39,
+        44
+      ],
+      "dominant": 5,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_neva",
+      "name": "Neva",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        181.1,
+        294.3,
+        498.1,
+        701.9,
+        883.0,
+        996.2
+      ],
+      "commas": [
+        0,
+        8,
+        13,
+        22,
+        31,
+        39,
+        44
+      ],
+      "dominant": 4,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_hicaz",
+      "name": "Hicaz",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        113.2,
+        384.9,
+        498.1,
+        701.9,
+        883.0,
+        996.2
+      ],
+      "commas": [
+        0,
+        5,
+        17,
+        22,
+        31,
+        39,
+        44
+      ],
+      "dominant": 4,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_hicazkar",
+      "name": "Hicazkar",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        113.2,
+        384.9,
+        498.1,
+        701.9,
+        815.1,
+        1086.8
+      ],
+      "commas": [
+        0,
+        5,
+        17,
+        22,
+        31,
+        36,
+        48
+      ],
+      "dominant": 5,
+      "tonic_hint": "G"
+    },
+    {
+      "id": "makam_karcigar",
+      "name": "Karcığar",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        181.1,
+        294.3,
+        498.1,
+        611.3,
+        883.0,
+        996.2
+      ],
+      "commas": [
+        0,
+        8,
+        13,
+        22,
+        27,
+        39,
+        44
+      ],
+      "dominant": 4,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_kurdilihicazkar",
+      "name": "Kürdilihicazkar",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        90.6,
+        294.3,
+        498.1,
+        701.9,
+        815.1,
+        1086.8
+      ],
+      "commas": [
+        0,
+        4,
+        13,
+        22,
+        31,
+        36,
+        48
+      ],
+      "dominant": 5,
+      "tonic_hint": "G"
+    },
+    {
+      "id": "makam_nihavent",
+      "name": "Nihavent",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        203.8,
+        294.3,
+        498.1,
+        701.9,
+        792.5,
+        996.2
+      ],
+      "commas": [
+        0,
+        9,
+        13,
+        22,
+        31,
+        35,
+        44
+      ],
+      "dominant": 5,
+      "tonic_hint": "G"
+    },
+    {
+      "id": "makam_mahur",
+      "name": "Mahur",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        203.8,
+        407.5,
+        498.1,
+        701.9,
+        905.7,
+        1109.4
+      ],
+      "commas": [
+        0,
+        9,
+        18,
+        22,
+        31,
+        40,
+        49
+      ],
+      "dominant": 5,
+      "tonic_hint": "G"
+    },
+    {
+      "id": "makam_acemasiran",
+      "name": "Acemaşiran",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        203.8,
+        407.5,
+        498.1,
+        701.9,
+        905.7,
+        1109.4
+      ],
+      "commas": [
+        0,
+        9,
+        18,
+        22,
+        31,
+        40,
+        49
+      ],
+      "dominant": 5,
+      "tonic_hint": "F"
+    },
+    {
+      "id": "makam_acemkurdi",
+      "name": "Acemkürdi",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        90.6,
+        294.3,
+        498.1,
+        701.9,
+        792.5,
+        996.2
+      ],
+      "commas": [
+        0,
+        4,
+        13,
+        22,
+        31,
+        35,
+        44
+      ],
+      "dominant": 4,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_huzzam",
+      "name": "Hüzzam",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        113.2,
+        317.0,
+        430.2,
+        701.9,
+        815.1,
+        1018.9
+      ],
+      "commas": [
+        0,
+        5,
+        14,
+        19,
+        31,
+        36,
+        45
+      ],
+      "dominant": 3,
+      "tonic_hint": "B koma-flat"
+    },
+    {
+      "id": "makam_segah",
+      "name": "Segah",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        113.2,
+        317.0,
+        520.8,
+        701.9,
+        815.1,
+        1018.9
+      ],
+      "commas": [
+        0,
+        5,
+        14,
+        23,
+        31,
+        36,
+        45
+      ],
+      "dominant": 3,
+      "tonic_hint": "B koma-flat"
+    },
+    {
+      "id": "makam_saba",
+      "name": "Saba",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        181.1,
+        294.3,
+        407.5,
+        701.9,
+        792.5,
+        996.2
+      ],
+      "commas": [
+        0,
+        8,
+        13,
+        18,
+        31,
+        35,
+        44
+      ],
+      "dominant": 3,
+      "tonic_hint": "A"
+    },
+    {
+      "id": "makam_sultaniyegah",
+      "name": "Sultaniyegah",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        203.8,
+        294.3,
+        498.1,
+        701.9,
+        815.1,
+        1086.8
+      ],
+      "commas": [
+        0,
+        9,
+        13,
+        22,
+        31,
+        36,
+        48
+      ],
+      "dominant": 5,
+      "tonic_hint": "D"
+    },
+    {
+      "id": "makam_suzinak",
+      "name": "Suzinak",
+      "family": "makam",
+      "tier": 3,
+      "tradition": "turkish",
+      "cents": [
+        0.0,
+        203.8,
+        384.9,
+        498.1,
+        701.9,
+        815.1,
+        1086.8
+      ],
+      "commas": [
+        0,
+        9,
+        17,
+        22,
+        31,
+        36,
+        48
+      ],
+      "dominant": 5,
+      "tonic_hint": "G"
+    },
+    {
+      "id": "mela_1",
+      "name": "Kanakangi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        498,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 1,
+      "ordinal": "1st"
+    },
+    {
+      "id": "mela_2",
+      "name": "Ratnangi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        498,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 2,
+      "ordinal": "2nd"
+    },
+    {
+      "id": "mela_3",
+      "name": "Ganamurti",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        498,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 3,
+      "ordinal": "3rd"
+    },
+    {
+      "id": "mela_4",
+      "name": "Vanaspati",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        498,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 4,
+      "ordinal": "4th"
+    },
+    {
+      "id": "mela_5",
+      "name": "Manavati",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        498,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 5,
+      "ordinal": "5th"
+    },
+    {
+      "id": "mela_6",
+      "name": "Tanarupi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        498,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 6,
+      "ordinal": "6th"
+    },
+    {
+      "id": "mela_7",
+      "name": "Senavati",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        498,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 7,
+      "ordinal": "7th"
+    },
+    {
+      "id": "mela_8",
+      "name": "Hanumatodi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        498,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 8,
+      "ordinal": "8th",
+      "thaat": "Bhairavi"
+    },
+    {
+      "id": "mela_9",
+      "name": "Dhenuka",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        498,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 9,
+      "ordinal": "9th"
+    },
+    {
+      "id": "mela_10",
+      "name": "Natakapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        498,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 10,
+      "ordinal": "10th"
+    },
+    {
+      "id": "mela_11",
+      "name": "Kokilapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        498,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 11,
+      "ordinal": "11th"
+    },
+    {
+      "id": "mela_12",
+      "name": "Rupavati",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        498,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 12,
+      "ordinal": "12th"
+    },
+    {
+      "id": "mela_13",
+      "name": "Gayakapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        498,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 13,
+      "ordinal": "13th"
+    },
+    {
+      "id": "mela_14",
+      "name": "Vakulabharanam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        498,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 14,
+      "ordinal": "14th"
+    },
+    {
+      "id": "mela_15",
+      "name": "Mayamalavagowla",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        498,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 15,
+      "ordinal": "15th",
+      "thaat": "Bhairav"
+    },
+    {
+      "id": "mela_16",
+      "name": "Chakravakam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        498,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 16,
+      "ordinal": "16th"
+    },
+    {
+      "id": "mela_17",
+      "name": "Suryakantam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        498,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 17,
+      "ordinal": "17th"
+    },
+    {
+      "id": "mela_18",
+      "name": "Hatakambari",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        498,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 18,
+      "ordinal": "18th"
+    },
+    {
+      "id": "mela_19",
+      "name": "Jhankaradhwani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        498,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 19,
+      "ordinal": "19th"
+    },
+    {
+      "id": "mela_20",
+      "name": "Natabhairavi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        498,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 20,
+      "ordinal": "20th",
+      "thaat": "Asavari"
+    },
+    {
+      "id": "mela_21",
+      "name": "Keeravani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        498,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 21,
+      "ordinal": "21st"
+    },
+    {
+      "id": "mela_22",
+      "name": "Kharaharapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        498,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 22,
+      "ordinal": "22nd",
+      "thaat": "Kafi"
+    },
+    {
+      "id": "mela_23",
+      "name": "Gourimanohari",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        498,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 23,
+      "ordinal": "23rd"
+    },
+    {
+      "id": "mela_24",
+      "name": "Varunapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        498,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 24,
+      "ordinal": "24th"
+    },
+    {
+      "id": "mela_25",
+      "name": "Mararanjani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        498,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 25,
+      "ordinal": "25th"
+    },
+    {
+      "id": "mela_26",
+      "name": "Charukesi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        498,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 26,
+      "ordinal": "26th"
+    },
+    {
+      "id": "mela_27",
+      "name": "Sarasangi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        498,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 27,
+      "ordinal": "27th"
+    },
+    {
+      "id": "mela_28",
+      "name": "Harikambhoji",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        498,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 28,
+      "ordinal": "28th",
+      "thaat": "Khamaj"
+    },
+    {
+      "id": "mela_29",
+      "name": "Dheerasankarabharanam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        498,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 29,
+      "ordinal": "29th",
+      "thaat": "Bilawal"
+    },
+    {
+      "id": "mela_30",
+      "name": "Naganandini",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        498,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 30,
+      "ordinal": "30th"
+    },
+    {
+      "id": "mela_31",
+      "name": "Yagapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        498,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 31,
+      "ordinal": "31st"
+    },
+    {
+      "id": "mela_32",
+      "name": "Ragavardhini",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        498,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 32,
+      "ordinal": "32nd"
+    },
+    {
+      "id": "mela_33",
+      "name": "Gangeyabhushani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        498,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 33,
+      "ordinal": "33rd"
+    },
+    {
+      "id": "mela_34",
+      "name": "Vagadheeswari",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        498,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 34,
+      "ordinal": "34th"
+    },
+    {
+      "id": "mela_35",
+      "name": "Shulini",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        498,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 35,
+      "ordinal": "35th"
+    },
+    {
+      "id": "mela_36",
+      "name": "Chalanata",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        498,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 36,
+      "ordinal": "36th"
+    },
+    {
+      "id": "mela_37",
+      "name": "Salagam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        590,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 37,
+      "ordinal": "37th"
+    },
+    {
+      "id": "mela_38",
+      "name": "Jalarnavam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        590,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 38,
+      "ordinal": "38th"
+    },
+    {
+      "id": "mela_39",
+      "name": "Jhalavarali",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        590,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 39,
+      "ordinal": "39th"
+    },
+    {
+      "id": "mela_40",
+      "name": "Navaneetam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        590,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 40,
+      "ordinal": "40th"
+    },
+    {
+      "id": "mela_41",
+      "name": "Pavani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        590,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 41,
+      "ordinal": "41st"
+    },
+    {
+      "id": "mela_42",
+      "name": "Raghupriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        204,
+        590,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 42,
+      "ordinal": "42nd"
+    },
+    {
+      "id": "mela_43",
+      "name": "Gavambhodi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        590,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 43,
+      "ordinal": "43rd"
+    },
+    {
+      "id": "mela_44",
+      "name": "Bhavapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        590,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 44,
+      "ordinal": "44th"
+    },
+    {
+      "id": "mela_45",
+      "name": "Shubhapantuvarali",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        590,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 45,
+      "ordinal": "45th",
+      "thaat": "Todi"
+    },
+    {
+      "id": "mela_46",
+      "name": "Shadvidamargini",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        590,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 46,
+      "ordinal": "46th"
+    },
+    {
+      "id": "mela_47",
+      "name": "Suvarnangi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        590,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 47,
+      "ordinal": "47th"
+    },
+    {
+      "id": "mela_48",
+      "name": "Divyamani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        316,
+        590,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 48,
+      "ordinal": "48th"
+    },
+    {
+      "id": "mela_49",
+      "name": "Dhavalambari",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        590,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 49,
+      "ordinal": "49th"
+    },
+    {
+      "id": "mela_50",
+      "name": "Namanarayani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        590,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 50,
+      "ordinal": "50th"
+    },
+    {
+      "id": "mela_51",
+      "name": "Kamavardhini",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        590,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 51,
+      "ordinal": "51st",
+      "thaat": "Purvi"
+    },
+    {
+      "id": "mela_52",
+      "name": "Ramapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        590,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 52,
+      "ordinal": "52nd"
+    },
+    {
+      "id": "mela_53",
+      "name": "Gamanashrama",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        590,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 53,
+      "ordinal": "53rd",
+      "thaat": "Marwa"
+    },
+    {
+      "id": "mela_54",
+      "name": "Vishwambari",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        90,
+        386,
+        590,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 54,
+      "ordinal": "54th"
+    },
+    {
+      "id": "mela_55",
+      "name": "Shamalangi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        590,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 55,
+      "ordinal": "55th"
+    },
+    {
+      "id": "mela_56",
+      "name": "Shanmukhapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        590,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 56,
+      "ordinal": "56th"
+    },
+    {
+      "id": "mela_57",
+      "name": "Simhendramadhyamam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        590,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 57,
+      "ordinal": "57th"
+    },
+    {
+      "id": "mela_58",
+      "name": "Hemavati",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        590,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 58,
+      "ordinal": "58th"
+    },
+    {
+      "id": "mela_59",
+      "name": "Dharmavati",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        590,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 59,
+      "ordinal": "59th"
+    },
+    {
+      "id": "mela_60",
+      "name": "Neetimati",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        316,
+        590,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 60,
+      "ordinal": "60th"
+    },
+    {
+      "id": "mela_61",
+      "name": "Kantamani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        590,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 61,
+      "ordinal": "61st"
+    },
+    {
+      "id": "mela_62",
+      "name": "Rishabhapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        590,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 62,
+      "ordinal": "62nd"
+    },
+    {
+      "id": "mela_63",
+      "name": "Latangi",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        590,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 63,
+      "ordinal": "63rd"
+    },
+    {
+      "id": "mela_64",
+      "name": "Vachaspati",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        590,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 64,
+      "ordinal": "64th"
+    },
+    {
+      "id": "mela_65",
+      "name": "Mechakalyani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        590,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 65,
+      "ordinal": "65th",
+      "thaat": "Kalyan"
+    },
+    {
+      "id": "mela_66",
+      "name": "Chitrambari",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        204,
+        386,
+        590,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 66,
+      "ordinal": "66th"
+    },
+    {
+      "id": "mela_67",
+      "name": "Sucharitra",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        590,
+        702,
+        792,
+        884
+      ],
+      "dominant": 5,
+      "number": 67,
+      "ordinal": "67th"
+    },
+    {
+      "id": "mela_68",
+      "name": "Jyotiswarupini",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        590,
+        702,
+        792,
+        996
+      ],
+      "dominant": 5,
+      "number": 68,
+      "ordinal": "68th"
+    },
+    {
+      "id": "mela_69",
+      "name": "Dhatuvardhani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        590,
+        702,
+        792,
+        1088
+      ],
+      "dominant": 5,
+      "number": 69,
+      "ordinal": "69th"
+    },
+    {
+      "id": "mela_70",
+      "name": "Nasikabhushani",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        590,
+        702,
+        884,
+        996
+      ],
+      "dominant": 5,
+      "number": 70,
+      "ordinal": "70th"
+    },
+    {
+      "id": "mela_71",
+      "name": "Kosalam",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        590,
+        702,
+        884,
+        1088
+      ],
+      "dominant": 5,
+      "number": 71,
+      "ordinal": "71st"
+    },
+    {
+      "id": "mela_72",
+      "name": "Rasikapriya",
+      "family": "melakarta",
+      "tier": 3,
+      "tradition": "indian",
+      "cents": [
+        0,
+        316,
+        386,
+        590,
+        702,
+        996,
+        1088
+      ],
+      "dominant": 5,
+      "number": 72,
+      "ordinal": "72nd"
+    }
+  ]
+}

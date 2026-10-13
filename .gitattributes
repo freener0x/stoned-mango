@@ -1,0 +1,4 @@
+# Shell scripts run inside Linux/WSL and must keep LF line endings.
+*.sh text eol=lf
+# Windows batch files are stored with CRLF and never converted.
+*.cmd -text

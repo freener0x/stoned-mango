@@ -1,0 +1,3 @@
+# The "Sponsor" button on the GitHub page. Keep it in step with web/donate.json (the site's Donate page).
+# GitHub's button only takes links, so the crypto addresses are on the site's Donate page.
+custom: ["https://cash.app/$freener", "https://stoned-mango.pages.dev/#/donate"]

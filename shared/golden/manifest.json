@@ -1,0 +1,71 @@
+{
+ "$comment": "Written by `python -m stoned_mango.golden`; checked by web/tests/parity.test.ts.",
+ "model": "key-cnn.fp32.onnx sha256:f403e512e4e4f258",
+ "fusion": {
+  "cnn": 0.98136,
+  "template": 1.86273,
+  "bass": 0.44306,
+  "ending": 0.0,
+  "drone": 0.37393
+ },
+ "clips": {
+  "modulating-22k": {
+   "wav": "modulating-22k.wav",
+   "expected": "modulating-22k.json",
+   "label": "G major",
+   "segments": [
+    "C major",
+    "G major"
+   ]
+  },
+  "dorian-44k-stereo": {
+   "wav": "dorian-44k-stereo.wav",
+   "expected": "dorian-44k-stereo.json",
+   "label": "D Dorian",
+   "segments": [
+    "D Dorian"
+   ]
+  },
+  "noise-22k": {
+   "wav": "noise-22k.wav",
+   "expected": "noise-22k.json",
+   "label": "No clear key",
+   "segments": [
+    "No clear key"
+   ]
+  },
+  "sikah-22k": {
+   "wav": "sikah-22k.wav",
+   "expected": "sikah-22k.json",
+   "label": "Maqam Sikah on E half-flat",
+   "segments": [
+    "Maqam Sikah on E half-flat"
+   ]
+  },
+  "kalyan-22k": {
+   "wav": "kalyan-22k.wav",
+   "expected": "kalyan-22k.json",
+   "label": "Kalyan thaat, Sa = D",
+   "segments": [
+    "Kalyan thaat, Sa = D"
+   ]
+  }
+ },
+ "compressed": {
+  "modulating-22k.mp3": {
+   "source": "modulating-22k.wav",
+   "label": "G major",
+   "segments": [
+    "C major",
+    "G major"
+   ]
+  },
+  "dorian-22k.flac": {
+   "source": "dorian-44k-stereo.wav",
+   "label": "D Dorian",
+   "segments": [
+    "D Dorian"
+   ]
+  }
+ }
+}

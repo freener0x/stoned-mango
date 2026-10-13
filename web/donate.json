@@ -1,0 +1,15 @@
+{
+  "$comment": "Donation details for the Donate page (and .github/FUNDING.yml). Empty values are hidden. QR codes are made at build time.",
+  "cashApp": "$freener",
+  "paypal": "",
+  "checkout": "",
+  "githubSponsors": "",
+  "liberapay": "",
+  "crypto": {
+    "BTC": "bc1qw07yj62hae5nflfz6pwt8yyr57377adkclsy3t",
+    "ETH": "0x79Ff39eCD0D2520c5353e011ac1317C51dc2AC3A",
+    "SOL": "7eE8qckeA15wD3FVjG3R6Uuw1eVrZmWohP5pS8hDFfp3",
+    "XMR": "84L4Twd2DcNjHevR6qUzz8fnLDzmyyLZohwG8Zs5hSmtUWMPFRjdefvPJX2L89wZcahvCCgpBRwZRcP84V3vzHWPNqHx4TR"
+  },
+  "ethNetwork": "Ethereum mainnet"
+}

@@ -30,4 +30,7 @@ test('each path gets the right policy', () => {
   assert.ok(all.some(([n, v]) => n === 'X-Content-Type-Options' && v === 'nosniff'));
   assert.ok(all.some(([n, v]) => n === 'Cache-Control' && v.includes('immutable')));
   assert.ok(headersFor('/sw.js', rules).some(([n, v]) => n === 'Cache-Control' && v === 'no-cache'));
+  for (const path of ['/', '/assets/main-AbC12.js', '/sw.js', '/does-not-exist']) {
+    assert.ok(headersFor(path, rules).some(([n, v]) => n === 'Strict-Transport-Security' && /max-age=\d{8}/.test(v)), path);
+  }
 });

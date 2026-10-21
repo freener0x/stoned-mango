@@ -5,7 +5,7 @@ export function PrivacyPage() {
     <main className="page prose">
       <h1>Privacy</h1>
       <p className="lead">Your music never leaves your device. That isn’t a policy we ask you to trust: the app is built so it
-        can’t send your music anywhere, and you can check that yourself.</p>
+        doesn’t send your music anywhere, and you can check that yourself.</p>
 
       <section>
         <h2>What happens to your files</h2>
@@ -37,9 +37,11 @@ export function PrivacyPage() {
           <li><strong>Watch the network.</strong> In a desktop browser, open the developer tools (F12), choose the Network tab, and
             analyse a folder. No request appears.</li>
           <li><strong>Read the security policy.</strong> In the same tools, the page’s <code>Content-Security-Policy</code> header
-            includes <code>connect-src 'self'</code>: the browser itself blocks the page from contacting any other site.</li>
+            includes <code>connect-src 'self'</code>: the browser itself refuses the page’s uploads and other requests to any
+            other site. The libraries that analyse your music run in background workers under the same rule.</li>
           <li><strong>Read the code.</strong> It’s open source (AGPL-3.0), and the published site is built from it automatically.
-            An automated test analyses files in a real browser on every change and fails if any network request happens.</li>
+            An automated test analyses files in a real browser on every change and fails if the page makes any web request
+            while it analyses.</li>
         </ol>
       </section>
 

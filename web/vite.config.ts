@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig, type Plugin } from 'vite';
@@ -50,6 +50,14 @@ function securityHeaders(): Plugin {
           return;
         }
         for (const [name, value] of headersFor(path, rules)) res.setHeader(name, value);
+        // Like Cloudflare Pages with a 404.html: an address with no file gets that page and a 404 (without
+        // one, Pages would serve the app at any address, outside the policy that only "/" carries)
+        if (path !== '/' && !isFile(outDir, path)) {
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'text/html; charset=utf-8');
+          res.end(readFileSync(join(outDir, '404.html')));
+          return;
+        }
         next();
       });
     },
@@ -79,6 +87,16 @@ function licenses(): Plugin {
       this.emitFile({ type: 'asset', fileName: 'third-party-licenses.txt', source: thirdPartyLicenses(ids) });
     },
   };
+}
+
+/** Whether ``urlPath`` names a file inside ``dir``. */
+function isFile(dir: string, urlPath: string): boolean {
+  try {
+    const file = join(dir, decodeURIComponent(urlPath));
+    return file.startsWith(dir) && statSync(file).isFile();
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -119,6 +137,8 @@ function precache(): Plugin {
       const files = [...keep].sort();
       const hash = createHash('sha256');
       for (const f of files) hash.update(f).update(readFileSync(join(outDir, f)));
+      // The kept responses carry their headers, so a change to the headers alone needs a new version too
+      hash.update(headersFile(readFileSync(join(outDir, 'index.html'), 'utf8')));
       const sw = readFileSync(resolve(__dirname, 'src/pwa/sw.js'), 'utf8')
         .replace('__VERSION__', hash.digest('hex').slice(0, 12))
         .replace('__FILES__', JSON.stringify(files.map((f) => (f === 'index.html' ? base : `${base}${f}`))))

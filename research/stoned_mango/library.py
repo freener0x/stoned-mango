@@ -50,6 +50,8 @@ CHECK = 12  # most confident disagreements listed for a listen
 
 def parse_key(text: str) -> tuple[int, str] | None:
     """'Am' / '8A' / '1m' / 'F# major' / '8A - Am' -> (tonic, 'major'|'minor'); None if unreadable."""
+    if len(text) > 255:  # longer than any file name: not a key (and the patterns get slow on huge text)
+        return None
     for part in re.split(r"\s*[/,;|]\s*|\s+-\s+", text.strip()):
         part = part.strip()
         m = _CAMELOT.match(part)
@@ -93,7 +95,8 @@ def read_key_tag(path: Path) -> str | None:
                 value = value[0] if value else ""
             if isinstance(value, bytes):
                 value = value.decode("utf-8", "replace")
-            value = str(value).strip()
+            # cut, so a huge tag can't stall the run; still too long to read as a key (see parse_key)
+            value = str(value).strip()[:256]
             if value:
                 return value
     return None
@@ -123,6 +126,15 @@ def describe(tag: tuple[int, str], ours: tuple[int, str]) -> str:
 
 
 def _analyse(job: tuple[str, str, str | None]) -> dict:
+    """One track (see _analyse_track). A file that can't be read gives {"unreadable": error type}
+    instead of stopping the whole run, and its path stays out of the log (which may be shared)."""
+    try:
+        return _analyse_track(job)
+    except Exception as e:  # any decoder or analysis error, for this one file
+        return {"unreadable": type(e).__name__}
+
+
+def _analyse_track(job: tuple[str, str, str | None]) -> dict:
     """One track: answers from every engine, plus where each tonic cue points."""
     from .analysis import default_cnn
     from .features import extract
@@ -330,6 +342,9 @@ def main(argv: list[str] | None = None) -> int:
         for i, ((p, raw, key), res) in enumerate(zip(sample, pool.map(_analyse, jobs, chunksize=1)), 1):
             if i % 10 == 0 or i == len(sample):
                 print(f"  {i}/{len(sample)} tracks, {time.time() - t0:.0f}s", flush=True)
+            if "unreadable" in res:
+                counts["unreadable"] += 1
+                continue
             if res.get("silent"):
                 counts["silent"] += 1
                 continue

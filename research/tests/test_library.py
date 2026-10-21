@@ -67,6 +67,22 @@ def test_read_key_tag_flac_and_mp3(tmp_path):
     assert read_key_tag(mp3) == "F#m"
 
 
+def test_read_key_tag_cuts_long_text(tmp_path):
+    import time
+
+    from mutagen.id3 import ID3, TKEY
+
+    mp3 = tmp_path / "long.mp3"
+    mp3.write_bytes(b"")
+    tags = ID3()
+    tags.add(TKEY(encoding=3, text=["A" + " " * 50_000 + "x"]))  # the key patterns took minutes on this
+    tags.save(mp3)
+    t0 = time.time()
+    raw = read_key_tag(mp3)
+    assert len(raw) <= 256 and parse_key(raw) is None  # unreadable, not 'A'
+    assert time.time() - t0 < 1
+
+
 @pytest.mark.skipif(default_cnn() is None, reason="needs the bundled model")
 def test_library_end_to_end(tmp_path, render_piece, sr, capsys):
     music = tmp_path / "music"
@@ -76,10 +92,13 @@ def test_library_end_to_end(tmp_path, render_piece, sr, capsys):
     _tagged(music / "short.flac", "Am", sr=sr)
     sf.write(music / "Some Artist - Mixo Song (G).wav", render_piece(7, "ionian", [1, 4, 5, 1]), sr)  # key in the name
     (music / "untagged.wav").write_bytes(b"")
+    (music / "Secret Song (Am).m4a").write_bytes(b"")  # unreadable, with a key in its name
     out = tmp_path / "run"
     assert library.main([str(music), "--out", str(out), "--min-seconds", "10", "--workers", "1"]) == 0
     text = (out / "SUMMARY.md").read_text()
     assert "3 full-length tracks with a key" in text and "dorian" not in text  # no file names in the summary
+    assert "unreadable 1" in text  # counted, and the run carried on
+    assert "Secret Song" not in capsys.readouterr().out  # the log never shows its name
     stats = __import__("json").loads((out / "library-stats.json").read_text())
     assert stats["engines"]["fusion"]["agree"] == 1.0
     assert (out / "tracks.csv").read_text().count("\n") == 4
@@ -98,7 +117,7 @@ def test_library_end_to_end(tmp_path, render_piece, sr, capsys):
     ("x y-z c#min w", (1, "minor")), ("song emaj mix", (4, "major")), ("Feat. Amin - Track", None), ("x b y z", None),
     # not keys: words in titles, lone letters as artists, track numbers
     ("Here I Am", None), ("A Minor Incident", None), ("Artist - I Am (Original Mix)", None), ("B - Title", None),
-    ("Track 01", None), ("2Pac - Changes", None), ("Artist - Title in a minute", None),
+    ("Track 01", None), ("2Pax - Changes", None), ("Artist - Title in a minute", None),
 ])
 def test_key_from_name(name, expected):
     got = key_from_name(name)

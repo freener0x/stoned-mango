@@ -1,8 +1,8 @@
 # Phase 8 report: maqam, makam and raga-family scales
 
-**Status:** done. Built, tested, and measured on real Turkish and Carnatic recordings and on your library (its totals stay private).
-- The first "Automatic" gave a maqam, makam or raga name to 8% of the GiantSteps tracks, and to a similar share of your songs (§7).
-- **Refitted on your PC's per-song measurements (§8):** 0 of 604 GiantSteps tracks, and only a handful of your songs.
+**Status:** done. Built, tested, and measured on real Turkish and Carnatic recordings and on your library (its results stay private).
+- The first "Automatic" gave a maqam, makam or raga name to 8% of the GiantSteps tracks (§7).
+- **Refitted on your PC's per-song measurements (§8):** 0 of 604 GiantSteps tracks.
 - But it now recognises only about 1 in 7 real makam and 1 in 10 Carnatic recordings. So, as you chose, the default stays **"Never: Western scales only"**; "Always, <tradition>" is the choice for people who play that music.
 
 ![A song in the Kalyan thaat, with the ≈ code, notes in cents, the melakarta, the Western name and a raga shortlist](song-view.png)
@@ -152,11 +152,11 @@ Two changes came straight from testing on real music instead of only on generate
 | Carnatic (CompMusic raga dataset, 477) | **Sa within 25 cents: 86%** (Sa taken for Pa or Ma: 8%) |
 | ... of which 168 in ragas the app knows by name | parent melakarta 46%, the raga's notes all in the scale found 48%, the raga in the shortlist 32% |
 | GiantSteps (604 real electronic tracks) | **8.3% got a maqam, makam or raga name** (13 Arabic, 21 Turkish, 16 Indian) |
-| Your music | a similar share (the totals stay private) |
+| Your music | results kept private |
 
 **What went wrong:**
 - The intonation test ("notes 2.5+ cents off the piano's tuning, on average") fired for nearly every real track. Generated Western songs are perfectly in tune; real recordings aren't (vibrato, detuned layers, pitch drift). So in practice the gate rested on the template comparison alone.
-- Even the strictest Western margin measured (0.06) still named 2.5% of GiantSteps, and about as many of your songs, and it would cut real makam use to a fifth.
+- Even the strictest Western margin measured (0.06) still named 2.5% of GiantSteps, and it would cut real makam use to a fifth.
 
 **What changed now:**
 - The default is "Never: Western scales only" in the app, the command line and the engine.
@@ -165,7 +165,7 @@ Two changes came straight from testing on real music instead of only on generate
 
 **What I asked for (done):** a second run of `world-windows.cmd`, from the latest version of the project:
 
-1. Download the ZIP (log in to GitHub first; the project is private):
+1. Download the ZIP (no login needed; the repository is public):
    **https://github.com/freener0x/stoned-mango/archive/refs/heads/claude/audio-key-detection-khkh02.zip**
 2. Right-click the ZIP → **Properties** → tick **Unblock** (if it's there) → **OK**.
 3. Right-click the ZIP → **Extract All…** → choose the same folder as before → **Extract**. When Windows asks, choose **Replace the files in the destination**. Your earlier results and the datasets are kept.
@@ -193,7 +193,7 @@ The same steps are in the [Windows guide](../phase2/TRAINING-ON-WINDOWS.md#getti
 | | Given a maqam, makam or raga name |
 |---|---|
 | GiantSteps (604 real electronic tracks) | **0** (first version: 50) |
-| Your library (held out) | **a handful** (far fewer than the first version) |
+| Your library (held out) | results kept private |
 | Generated Western songs (150), noise and drum clips (40) | 0 |
 
 | What Automatic still recognises | |

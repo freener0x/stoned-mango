@@ -9,7 +9,7 @@ import { test } from 'node:test';
 import { fileKind, readKeyTags, tagFile, toBlob, type KeyTags } from '../src/ui/tagging/files.ts';
 import { buildTag, deunsync, parseTag, readKeys, TagError, tagLength, withKeys } from '../src/ui/tagging/id3.ts';
 import { keyTags } from '../src/ui/tagging/keys.ts';
-import { crc32, zip } from '../src/ui/tagging/zip.ts';
+import { crc32, entryName, zip } from '../src/ui/tagging/zip.ts';
 import type { Result } from '../src/engine/analysis.ts';
 
 const DIR = new URL('../../shared/golden/tags/', import.meta.url);
@@ -138,4 +138,80 @@ test('what is written for a result', () => {
   assert.deepEqual(keyTags(r, { ...s, codeRule: 'home', tagFormat: 'camelot' }), { tkey: '7A', keyMode: 'D Dorian' });
   assert.deepEqual(keyTags(r, { ...s, tagFormat: 'openkey', tagModeFrame: false }), { tkey: '1d', keyMode: null });
   assert.equal(keyTags({ ...r, key: null } as Result, s), null);
+});
+
+test('ID3: the extended-header flag without an extended header keeps every frame (as mutagen reads it)', async () => {
+  for (const v4 of [false, true]) {
+    const body = [...frame('TIT2', text('My Title'), v4), ...frame('TPE1', text('Artist'), v4), ...new Array(32).fill(0)];
+    const t = parseTag(tag(v4 ? 4 : 3, 0x40, body));
+    assert.deepEqual(t.frames.map((f) => f.id), ['TIT2', 'TPE1']);
+    const mp3 = Uint8Array.from([...tag(v4 ? 4 : 3, 0x40, body), 0xff, 0xfb, 0x90, 0x64, ...new Array(64).fill(0)]);
+    const out = await blobBytes(toBlob(await tagFile(new Blob([mp3]), KEYS)));
+    const after = parseTag(out.subarray(0, tagLength(out)));
+    assert.deepEqual(after.frames.map((f) => f.id), ['TIT2', 'TPE1', 'TKEY', 'TXXX'], v4 ? 'v2.4' : 'v2.3');
+  }
+});
+
+test('ID3: real extended headers are skipped; impossible ones are refused', () => {
+  const frames = [...frame('TIT2', text('Hi')), 0, 0];
+  // v2.3: size 6 (excluding itself), flags, padding size
+  assert.deepEqual(parseTag(tag(3, 0x40, [0, 0, 0, 6, 0, 0, 0, 0, 0, 0, ...frames])).frames.map((f) => f.id), ['TIT2']);
+  // v2.4: size 6 (including itself), 1 flag byte, no flags
+  const frames4 = [...frame('TIT2', text('Hi'), true), 0, 0];
+  assert.deepEqual(parseTag(tag(4, 0x40, [0, 0, 0, 6, 1, 0, ...frames4])).frames.map((f) => f.id), ['TIT2']);
+  assert.throws(() => parseTag(tag(3, 0x40, [0, 0, 0, 7, ...new Array(20).fill(0)])), TagError); // not 6 or 10
+  assert.throws(() => parseTag(tag(4, 0x40, [0, 0, 0x7f, 0x7f, ...new Array(20).fill(0)])), TagError); // past the end
+});
+
+test('ID3: a v2.3 unsync flag on data that isn’t unsynchronised leaves the bytes as they are', () => {
+  const jpeg = [0, 0x69, 0, 3, 0, 0xff, 0xd8, 0xff, 0xe0, 0x12, 0xff, 0x00, 0x56, 0xff, 0xd9];
+  const t = parseTag(tag(3, 0x80, [...frame('APIC', jpeg), 0, 0]));
+  assert.deepEqual([...t.frames[0].data], jpeg);
+});
+
+test('ID3: long text and v2.4 data-length indicators', () => {
+  // a TXXX value of 200,000 NULs and a character: read in well under a second
+  const value = [0, ...text('note').slice(1), 0, ...new Array(200_000).fill(0), 0x78];
+  const big = [...[...'TXXX'].map((c) => c.charCodeAt(0)), ...[24, 16, 8, 0].map((s) => (value.length >> s) & 0xff), 0, 0, ...value];
+  const started = Date.now();
+  const t = withKeys(parseTag(tag(3, 0, [...big, ...frame('TKEY', text('C'))])), 'Am', null);
+  assert.ok(Date.now() - started < 1000, `took ${Date.now() - started} ms`);
+  assert.deepEqual(t.frames.map((f) => f.id), ['TXXX', 'TKEY']);
+  // a v2.4 KEY_MODE frame with a data length indicator is recognised, so it's replaced, not doubled
+  const mode = [0, ...[...'KEY_MODE'].map((c) => c.charCodeAt(0)), 0, ...[...'A minor'].map((c) => c.charCodeAt(0))];
+  const withDli = frame('TXXX', [...syncsafe(mode.length), ...mode], true, [0, 0x01]);
+  const t4 = parseTag(tag(4, 0, [...withDli, 0, 0]));
+  assert.equal(readKeys(t4).keyMode, 'A minor');
+  assert.deepEqual(withKeys(t4, 'Am', 'A Dorian').frames.map((f) => f.id), ['TKEY', 'TXXX']);
+});
+
+const riff = (chunks: number[][]) => {
+  const body = [0x57, 0x41, 0x56, 0x45, ...chunks.flat()];
+  return Uint8Array.from([0x52, 0x49, 0x46, 0x46, ...[0, 8, 16, 24].map((s) => (body.length >> s) & 0xff), ...body]);
+};
+const chunk = (id: string, data: number[]) =>
+  [...[...id].map((c) => c.charCodeAt(0)), ...[0, 8, 16, 24].map((s) => (data.length >> s) & 0xff), ...data, ...(data.length % 2 ? [0] : [])];
+const FMT = [1, 0, 1, 0, 0x44, 0xac, 0, 0, 0x88, 0x58, 1, 0, 2, 0, 16, 0];
+
+test('WAV: two ID3 chunks or thousands of chunks are refused, not rewritten', async () => {
+  const id3 = [...tag(3, 0, [...frame('TIT2', text('Hi')), 0, 0])];
+  const two = riff([chunk('fmt ', FMT), chunk('data', [0, 0]), chunk('id3 ', id3), chunk('ID3 ', id3)]);
+  await assert.rejects(tagFile(new Blob([two]), KEYS), /two ID3 tags/);
+  const many = riff([chunk('fmt ', FMT), chunk('data', [0, 0]), ...Array.from({ length: 300 }, () => chunk('JUNK', []))]);
+  await assert.rejects(tagFile(new Blob([many]), KEYS), TagError);
+  const few = riff([chunk('fmt ', FMT), chunk('data', [0, 0]), ...Array.from({ length: 20 }, () => chunk('JUNK', []))]);
+  assert.equal((await readKeyTags(new Blob([await blobBytes(toBlob(await tagFile(new Blob([few]), KEYS)))]))).tkey, '8A');
+});
+
+test('zip: entry names can’t leave the folder, and duplicates get their own name', async () => {
+  assert.equal(entryName('files/evil-folder/x/../../../evil.wav'), 'files/evil-folder/x/evil.wav');
+  assert.equal(entryName('x\\..\\..\\evil.wav'), 'x/evil.wav');
+  assert.equal(entryName('/abs/./a.mp3'), 'abs/a.mp3');
+  assert.equal(entryName('C:/Windows/a.mp3'), 'Windows/a.mp3');
+  assert.equal(entryName('a\u0000b\u001f.mp3'), 'ab.mp3');
+  assert.equal(entryName('../..'), 'file');
+  const bytes = await blobBytes(await zip([{ name: 'Song.mp3', parts: [Uint8Array.of(1)] }, { name: 'song.mp3', parts: [Uint8Array.of(2)] },
+    { name: 'Song.mp3', parts: [Uint8Array.of(3)] }]));
+  const names = [...new TextDecoder().decode(bytes).matchAll(/PK\x01\x02[\s\S]{42}([^\x00]*?\.mp3)/g)].map((m) => m[1]);
+  assert.deepEqual(names, ['Song.mp3', 'song (2).mp3', 'Song (3).mp3']);
 });

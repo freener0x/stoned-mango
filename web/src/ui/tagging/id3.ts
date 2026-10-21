@@ -49,6 +49,7 @@ export function tagLength(head: Uint8Array): number {
 const FRAME_ID = /^[A-Z0-9]{4}$/;
 
 function readFrames(body: Uint8Array, version: 3 | 4, start: number, plainSizes: boolean): Frame[] | null {
+  if (start > body.length) return null;
   const frames: Frame[] = [];
   let pos = start;
   while (pos + 10 <= body.length && body[pos] !== 0) {
@@ -64,6 +65,28 @@ function readFrames(body: Uint8Array, version: 3 | 4, start: number, plainSizes:
   return frames;
 }
 
+/**
+ * Whether ``b`` can be unsynchronised data: no 0xFF followed by 0xE0 or more, and no 0xFF at the end.
+ * Some taggers set the unsync flag on data that isn't; that is read as it is (as mutagen does).
+ */
+function unsynchronised(b: Uint8Array): boolean {
+  for (let i = 0; i < b.length; i++) if (b[i] === 0xff && (i + 1 === b.length || b[i + 1] >= 0xe0)) return false;
+  return true;
+}
+
+/**
+ * Where the frames start when the extended-header flag is set. Some taggers set the flag without
+ * writing the header: when a frame ID is already there, there is none (as mutagen reads it).
+ * Otherwise the size must be one the version allows (v2.3: 6 or 10 bytes after its own 4; v2.4: 6
+ * or more, itself included), or the tag is refused.
+ */
+function framesStart(body: Uint8Array, version: 3 | 4): number {
+  if (body.length >= 4 && FRAME_ID.test(ascii(body, 0, 4))) return 0;
+  const n = body.length < 4 ? 0 : version === 3 ? 4 + u32(body, 0) : syncsafe(body, 0);
+  if (!(version === 3 ? n === 10 || n === 14 : n >= 6) || n > body.length) throw new TagError("its tag couldn't be read safely");
+  return n;
+}
+
 /** Parses the tag at the start of ``bytes`` (which must hold all of it). No tag: an empty v2.3 tag. */
 export function parseTag(bytes: Uint8Array): Tag {
   const total = tagLength(bytes);
@@ -75,9 +98,8 @@ export function parseTag(bytes: Uint8Array): Tag {
   const version = major as 3 | 4;
   const flags = bytes[5];
   let body = bytes.subarray(10, 10 + syncsafe(bytes, 6));
-  if (version === 3 && flags & 0x80) body = deunsync(body);
-  let start = 0;
-  if (flags & 0x40) start = version === 3 ? 4 + u32(body, 0) : syncsafe(body, 0);
+  if (version === 3 && flags & 0x80 && unsynchronised(body)) body = deunsync(body);
+  const start = flags & 0x40 ? framesStart(body, version) : 0;
   // Some taggers wrote v2.4 frame sizes as plain integers: try that if the proper reading fails.
   const frames = readFrames(body, version, start, false) ?? (version === 4 ? readFrames(body, version, start, true) : null);
   if (!frames) throw new TagError("its tag couldn't be read safely");
@@ -96,7 +118,11 @@ function encode(s: string, enc: number): number[] {
 }
 
 function decode(b: Uint8Array, enc: number): string {
-  if (enc === 0) return Array.from(b, (c) => String.fromCharCode(c)).join('');
+  if (enc === 0) {
+    let s = '';
+    for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode(...b.subarray(i, i + 0x8000));
+    return s;
+  }
   if (enc === 3) return new TextDecoder().decode(b);
   if (enc === 2) return new TextDecoder('utf-16be').decode(b);
   const be = b[0] === 0xfe && b[1] === 0xff;
@@ -104,19 +130,31 @@ function decode(b: Uint8Array, enc: number): string {
   return new TextDecoder(be ? 'utf-16be' : 'utf-16le').decode(b.subarray(bom ? 2 : 0));
 }
 
-/** A text frame's value (and TXXX description), or null for frames that are compressed or encrypted. */
-function frameText(f: Frame, version: 3 | 4): { description?: string; value: string } | null {
-  const opaque = version === 3 ? f.flags[1] & 0xc0 : f.flags[1] & 0x0d;
+const stripNuls = (s: string) => {
+  let n = s.length;
+  while (n > 0 && s.charCodeAt(n - 1) === 0) n--;
+  return s.slice(0, n);
+};
+
+/**
+ * A text frame's value (and TXXX description), or null for frames that are compressed or encrypted.
+ * ``value: false`` decodes only a TXXX frame's description (a big value is never decoded for nothing).
+ */
+function frameText(f: Frame, version: 3 | 4, value = true): { description?: string; value: string } | null {
+  const opaque = version === 3 ? f.flags[1] & 0xc0 : f.flags[1] & 0x0c;
   if (opaque || !f.data.length) return null;
-  const data = version === 4 && f.flags[1] & 0x02 ? deunsync(f.data) : f.data;
+  let data = f.data;
+  if (version === 4 && f.flags[1] & 0x01) data = data.subarray(4); // a data length indicator comes first
+  if (version === 4 && f.flags[1] & 0x02) data = deunsync(data);
+  if (!data.length) return null;
   const enc = data[0];
-  const strip = (s: string) => s.replace(/\0+$/, '');
-  if (f.id !== 'TXXX') return { value: strip(decode(data.subarray(1), enc)) };
+  if (f.id !== 'TXXX') return { value: value ? stripNuls(decode(data.subarray(1), enc)) : '' };
   const wide = enc === 1 || enc === 2;
   let end = 1;
   if (wide) while (end + 1 < data.length && !(data[end] === 0 && data[end + 1] === 0)) end += 2;
   else while (end < data.length && data[end] !== 0) end += 1;
-  return { description: decode(data.subarray(1, end), enc), value: strip(decode(data.subarray(end + (wide ? 2 : 1)), enc)) };
+  const description = decode(data.subarray(1, end), enc);
+  return { description, value: value ? stripNuls(decode(data.subarray(end + (wide ? 2 : 1)), enc)) : '' };
 }
 
 export function readKeys(tag: Tag): { tkey: string | null; keyMode: string | null } {
@@ -124,10 +162,7 @@ export function readKeys(tag: Tag): { tkey: string | null; keyMode: string | nul
   let keyMode: string | null = null;
   for (const f of tag.frames) {
     if (f.id === 'TKEY') tkey = frameText(f, tag.version)?.value ?? null;
-    if (f.id === 'TXXX') {
-      const t = frameText(f, tag.version);
-      if (t?.description === KEY_MODE) keyMode = t.value;
-    }
+    if (f.id === 'TXXX' && frameText(f, tag.version, false)?.description === KEY_MODE) keyMode = frameText(f, tag.version)?.value ?? null;
   }
   return { tkey, keyMode };
 }
@@ -142,7 +177,7 @@ function textFrame(id: string, version: 3 | 4, value: string, description?: stri
 /** The tag with the key frames replaced (or removed when ``keyMode`` is null). */
 export function withKeys(tag: Tag, tkey: string, keyMode: string | null): Tag {
   if (!/^[A-Za-z0-9#]{1,3}$/.test(tkey)) throw new TagError(`not a key: ${tkey}`);
-  const frames = tag.frames.filter((f) => f.id !== 'TKEY' && !(f.id === 'TXXX' && frameText(f, tag.version)?.description === KEY_MODE));
+  const frames = tag.frames.filter((f) => f.id !== 'TKEY' && !(f.id === 'TXXX' && frameText(f, tag.version, false)?.description === KEY_MODE));
   frames.push(textFrame('TKEY', tag.version, tkey));
   if (keyMode) frames.push(textFrame('TXXX', tag.version, keyMode, KEY_MODE));
   return { ...tag, frames };

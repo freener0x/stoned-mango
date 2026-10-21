@@ -48,6 +48,10 @@ interface Chunk {
   end: number; // past the data and its pad byte
 }
 
+// Real WAV files have a handful of chunks; a file made of thousands is refused rather than walked
+// one small read at a time.
+const MAX_CHUNKS = 256;
+
 /** The chunks of a RIFF/WAVE file; strict, so that an unusual layout is never rewritten. */
 async function riffChunks(file: Blob): Promise<Chunk[]> {
   const head = await bytes(file, 0, 12);
@@ -61,6 +65,7 @@ async function riffChunks(file: Blob): Promise<Chunk[]> {
     const size = u32le(h, 4);
     const end = pos + 8 + size + (size & 1);
     if (pos + 8 + size > file.size) throw new TagError('the WAV file looks cut short');
+    if (chunks.length === MAX_CHUNKS) throw new TagError('unusual WAV layout');
     chunks.push({ id, start: pos, end: Math.min(end, file.size) });
     pos = end;
   }
@@ -71,6 +76,8 @@ async function riffChunks(file: Blob): Promise<Chunk[]> {
 const isId3Chunk = (c: Chunk) => c.id === 'id3 ' || c.id === 'ID3 ';
 
 async function wavTag(file: Blob, chunks: Chunk[]): Promise<Tag> {
+  // two tags can't both be kept in one, and dropping either would lose its frames
+  if (chunks.filter(isId3Chunk).length > 1) throw new TagError('the WAV file has two ID3 tags');
   const old = chunks.find(isId3Chunk);
   return old ? parseTag(await bytes(file, old.start + 8, old.end)) : parseTag(new Uint8Array(0));
 }

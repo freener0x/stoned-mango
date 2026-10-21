@@ -163,6 +163,7 @@ export class FeatureExtractor {
   private essentia: Essentia;
 
   constructor(essentia: Essentia, inputRate: number) {
+    if (!(inputRate >= 1000 && inputRate <= 768000)) throw new Error(`unsupported sample rate: ${inputRate} Hz`);
     this.essentia = essentia;
     this.resampler = new Resampler(inputRate);
     this.sampleRate = this.resampler.outputRate;

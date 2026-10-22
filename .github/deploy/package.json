@@ -1,0 +1,8 @@
+{
+  "name": "stoned-mango-deploy",
+  "private": true,
+  "description": "Wrangler for .github/workflows/deploy.yml, locked by package-lock.json and installed with npm ci --ignore-scripts, so the job holding the Cloudflare token runs only these exact packages.",
+  "dependencies": {
+    "wrangler": "4.148.0"
+  }
+}

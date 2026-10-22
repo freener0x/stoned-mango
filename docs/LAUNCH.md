@@ -97,21 +97,16 @@ The preview link from step 4 updates within a few minutes after I tell you it's 
 4. **Each QR code:** scan it with your wallet app's **Send** screen (don't send anything). It should fill in the same address.
 5. Optional, for peace of mind: send yourself a tiny amount to each address.
 
-## Step 7: Move to a fresh, clean repository
+## Step 7: Move to a fresh, clean repository (done)
 
-Once a repository is public, its whole history is visible, old versions of pull requests included. This repository's history holds the Gmail address of your GitHub account (in the very first commit, the one GitHub made when you created the project) and the totals from your music library (in old commit messages and old versions of the reports). Rewriting the history wouldn't remove them: GitHub keeps the old commits reachable through the pull request. So the public project starts fresh, under the same name, and this one stays private with all its history.
+Before going public, the project moved to a fresh repository under the same name, so its public history starts clean. The old development history held private details (your email address and results from your music library), and rewriting it wouldn't have removed them: GitHub keeps old commits reachable through pull requests. The old repository was renamed and stays private.
 
-**You (about 10 minutes):**
-1. **Rename this repository:** https://github.com/freener0x/stoned-mango → **Settings** → **General** → **Repository name** → `stoned-mango-dev` → **Rename**.
-2. **Create the new one:** https://github.com/new → **Repository name** `stoned-mango` → **Private** (for now) → leave README, .gitignore and licence **off**, so it starts empty → **Create repository**.
-3. **Give me access to it:** https://github.com/settings/installations → **Claude** → **Configure**. If it says "Only select repositories", add `stoned-mango` → **Save**. ("All repositories" needs nothing.)
-4. **A fresh copy of the Cloudflare token** (the old copy can't be shown again): Cloudflare → person icon → **My Profile** → **API Tokens** → **⋯** next to `stoned-mango GitHub` → **Roll** → copy it. This also stops the old repository from publishing.
-5. **Add both secrets to the new repository**, as in step 3: **Settings** → **Secrets and variables** → **Actions** → **New repository secret**: `CLOUDFLARE_API_TOKEN` (the new token) and `CLOUDFLARE_ACCOUNT_ID` (from **Workers & Pages**).
-6. **Protect future commits:** GitHub → your profile picture → **Settings** → **Emails** → tick **Keep my email addresses private** and **Block command line pushes that expose my email**.
-7. Optional: rename the Cloudflare account (**Account Home** → **⋯** next to the account → **Rename**), so a failed publishing run can never print your email address in its log.
-8. Tell me **"done"**.
-
-**Me:** I push the current version as one clean starting point: no email address, no library totals, no file names. It goes on the same branch name, with a new pull request. The site address, the "Source code" link and the ZIP download link stay the same. Every report and guide comes along; only the step-by-step history stays behind in `stoned-mango-dev`. I check that the new repository builds and publishes a preview, and send you the pull request's link.
+What was done, for reference:
+1. The old repository was renamed (it stays private, with all its history).
+2. A new, empty `stoned-mango` was created, and the Claude GitHub app given access to it.
+3. The Cloudflare token was rolled (a fresh copy) and both secrets added to the new repository.
+4. In GitHub's email settings, **Keep my email addresses private** and **Block command line pushes that expose my email** were turned on.
+5. The current version was pushed as one clean starting point, with a new pull request.
 
 ## Step 8: Make the new repository public
 

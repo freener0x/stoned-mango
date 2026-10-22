@@ -48,6 +48,7 @@ export function headersFile(html: string): string {
   const page = contentSecurityPolicy(html);
   return `# Written by the build (web/build/headers.ts). Served by Cloudflare Pages.
 /*
+  Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   X-Frame-Options: DENY

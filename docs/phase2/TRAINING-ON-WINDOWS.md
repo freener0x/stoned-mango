@@ -28,7 +28,8 @@ Open the **NVIDIA app** (or GeForce Experience) and install any driver update. I
 1. Download this ZIP:
    **https://github.com/freener0x/stoned-mango/archive/refs/heads/claude/audio-key-detection-khkh02.zip**
 2. Before extracting, right-click the ZIP → **Properties** → tick **Unblock** (if it's there) → **OK**. This stops Windows from blocking the scripts inside.
-3. Right-click the ZIP → **Extract All…** and extract it somewhere simple, for example `C:\stoned-mango`.
+3. Right-click the ZIP → **Extract All…** and extract it into your own Documents folder, for example `C:\Users\<you>\Documents\stoned-mango`.
+   (A folder straight under `C:\`, such as `C:\stoned-mango`, can be changed by every account on the PC. That's fine if you're the only one who uses it; otherwise move it into Documents.)
 
 ## Getting the latest version (whenever I change the scripts)
 
@@ -37,7 +38,7 @@ When I've changed something you need to run, download the project again. Your da
 1. **Download the ZIP again**:
    **https://github.com/freener0x/stoned-mango/archive/refs/heads/claude/audio-key-detection-khkh02.zip**
 2. Right-click the new ZIP → **Properties** → tick **Unblock** (if it's there) → **OK**.
-3. Right-click the ZIP → **Extract All…** → choose **the same folder as before** (for example `C:\stoned-mango`) → **Extract**.
+3. Right-click the ZIP → **Extract All…** → choose **the same folder as before** (for example `C:\Users\<you>\Documents\stoned-mango`) → **Extract**.
 4. When Windows asks, choose **Replace the files in the destination**.
 5. Double-click the script I asked for. If Windows says "Windows protected your PC", click **More info** → **Run anyway**.
 

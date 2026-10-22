@@ -29,6 +29,10 @@ export async function readWavHeader(blob: Blob): Promise<WavInfo | null> {
       const bitsPerSample = head.getUint16(pos + 22, true);
       if (format === 0xfffe && size >= 26) format = head.getUint16(pos + 32, true); // WAVE_FORMAT_EXTENSIBLE sub-format
       if (format !== 1 && format !== 3) return null;
+      // A header no real recording has (0 Hz, 0 channels, 13-bit…) is refused: a sample rate of 0
+      // would make every length infinite, and a huge one would make each read the whole file.
+      const bitsOk = format === 3 ? bitsPerSample === 32 || bitsPerSample === 64 : [8, 16, 24, 32].includes(bitsPerSample);
+      if (!bitsOk || channels < 1 || channels > 32 || sampleRate < 1000 || sampleRate > 768000) throw new Error('unsupported WAV header');
       fmt = { sampleRate, channels, bitsPerSample, float: format === 3 };
     } else if (id === 'data') {
       if (!fmt) return null;
@@ -40,11 +44,13 @@ export async function readWavHeader(blob: Blob): Promise<WavInfo | null> {
   return null;
 }
 
-/** Mono float32 chunks of about ``seconds`` each (channels averaged, as libsndfile + numpy do). */
+const MAX_CHUNK_BYTES = 16 * 2 ** 20;
+
+/** Mono float32 chunks of about ``seconds`` each, at most 16 MB of file (channels averaged, as libsndfile + numpy do). */
 export async function* wavChunks(blob: Blob, info: WavInfo, seconds = 10): AsyncGenerator<Float32Array> {
   const bytes = info.bitsPerSample / 8;
   const frameBytes = bytes * info.channels;
-  const chunkFrames = Math.max(1024, Math.floor(seconds * info.sampleRate));
+  const chunkFrames = Math.max(1024, Math.min(Math.floor(seconds * info.sampleRate), Math.floor(MAX_CHUNK_BYTES / frameBytes)));
   const end = info.dataOffset + info.dataBytes - (info.dataBytes % frameBytes);
   for (let off = info.dataOffset; off < end; off += chunkFrames * frameBytes) {
     const view = new DataView(await blob.slice(off, Math.min(end, off + chunkFrames * frameBytes)).arrayBuffer());

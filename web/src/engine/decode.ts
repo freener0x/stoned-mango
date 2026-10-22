@@ -6,12 +6,15 @@
 //   else NeedsMainThreadDecode: the pool decodes it with decodeAudioData on the main
 //        thread (whole file at once, so with tighter limits) and sends the samples over
 
+import { probeLength } from './probe.ts';
 import { readWavHeader, wavChunks } from './wav.ts';
 
 export const MAX_STREAM_SECONDS = 60 * 60;
 export const MAX_STREAM_BYTES = 500 * 2 ** 20;
 export const MAX_WHOLE_SECONDS = 15 * 60;
 export const MAX_WHOLE_BYTES = 150 * 2 ** 20;
+/** For a format whose length can't be read from its header (WebM, unusual files). */
+export const MAX_WHOLE_BYTES_UNKNOWN_LENGTH = 40 * 2 ** 20;
 
 export class NeedsMainThreadDecode extends Error {
   constructor() {
@@ -190,9 +193,25 @@ function concat(parts: Float32Array[]): Float32Array {
   return out;
 }
 
+/**
+ * Throws if a file is too long to decode whole: its length is read from its header first, since
+ * decodeAudioData holds everything it decodes in memory (15 minutes of stereo, or the same amount
+ * of audio in more channels, is the limit).
+ */
+export async function checkWholeDecode(file: Blob): Promise<void> {
+  if (file.size > MAX_WHOLE_BYTES) throw new Error(`file too large for this format (over ${MAX_WHOLE_BYTES / 2 ** 20} MB)`);
+  const length = await probeLength(file);
+  if (length?.seconds == null) {
+    if (file.size > MAX_WHOLE_BYTES_UNKNOWN_LENGTH) throw new Error(`file too large for this format (over ${MAX_WHOLE_BYTES_UNKNOWN_LENGTH / 2 ** 20} MB)`);
+    return;
+  }
+  if (length.seconds > MAX_WHOLE_SECONDS) throw new Error('longer than 15 minutes (the limit for this format)');
+  if (length.seconds * Math.max(2, length.channels ?? 2) > MAX_WHOLE_SECONDS * 2) throw new Error('too long for its number of channels (the limit for this format)');
+}
+
 /** Main-thread fallback: the whole file through decodeAudioData, then mono (needs a window context). */
 export async function decodeWhole(file: Blob): Promise<{ samples: Float32Array; sampleRate: number }> {
-  if (file.size > MAX_WHOLE_BYTES) throw new Error(`file too large for this format (over ${MAX_WHOLE_BYTES / 2 ** 20} MB)`);
+  await checkWholeDecode(file);
   const ctx = new OfflineAudioContext(1, 1, 44100);
   const buf = await ctx.decodeAudioData(await file.arrayBuffer());
   if (buf.duration > MAX_WHOLE_SECONDS) throw new Error('longer than 15 minutes (the limit for this format)');

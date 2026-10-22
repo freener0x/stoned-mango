@@ -30,6 +30,7 @@ async function partsCrc(parts: Part[]): Promise<number> {
 }
 
 export const ZIP_LIMIT = 0xffffffff - (64 << 20); // room for the headers
+export const ZIP_MAX_ENTRIES = 0xffff; // the count field's limit without ZIP64
 
 const u16 = (n: number) => [n & 0xff, (n >> 8) & 0xff];
 const u32 = (n: number) => [n & 0xff, (n >>> 8) & 0xff, (n >>> 16) & 0xff, (n >>> 24) & 0xff];
@@ -45,13 +46,35 @@ export interface ZipEntry {
   parts: Part[];
 }
 
+/**
+ * A safe entry name. File names come from the user's files and can hold anything a file system
+ * allows (on macOS and Linux even backslashes, "..", control characters), so the name is rebuilt
+ * from its folder parts: no empty, "." or ".." parts and no drive letter, so that no unzip tool can
+ * write outside the folder it extracts into.
+ */
+export function entryName(path: string): string {
+  const parts = path.split(/[\\/]+/).map((p) => p.replace(/[\x00-\x1f\x7f]/g, '')).filter((p) => p && p !== '.' && p !== '..');
+  if (/^[A-Za-z]:$/.test(parts[0] ?? '')) parts.shift();
+  return parts.join('/') || 'file';
+}
+
+/** ``name``, or "name (2).ext" and so on when a name is taken (ignoring case, like Windows and macOS). */
+function unique(name: string, used: Set<string>): string {
+  let out = name;
+  for (let n = 2; used.has(out.toLowerCase()); n++) out = name.replace(/(\.[^./]*)?$/, ` (${n})$1`);
+  used.add(out.toLowerCase());
+  return out;
+}
+
 export async function zip(entries: ZipEntry[], now = new Date()): Promise<Blob> {
   const out: Part[] = [];
   const central: number[] = [];
   const [time, date] = dosTime(now);
+  const used = new Set<string>();
   let offset = 0;
+  if (entries.length > ZIP_MAX_ENTRIES) throw new Error('too many files for one zip');
   for (const e of entries) {
-    const name = new TextEncoder().encode(e.name.replace(/^\/+/, ''));
+    const name = new TextEncoder().encode(unique(entryName(e.name), used));
     const size = partsSize(e.parts);
     const crc = await partsCrc(e.parts);
     // version 2.0, flag 0x0800 (UTF-8 names), method 0 (stored)

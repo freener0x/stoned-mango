@@ -9,6 +9,8 @@ import type { FromWorker, ToWorker } from './worker.ts';
 
 export const AUDIO_EXTENSIONS = ['.wav', '.wave', '.mp3', '.flac', '.ogg', '.oga', '.opus', '.m4a', '.aac', '.aif', '.aiff', '.webm'];
 export const MAX_WORKERS = 8;
+/** How long a worker gets to stop after Cancel before it's replaced (one stuck in a computation never reads the message). */
+export const CANCEL_GRACE_MS = 3000;
 
 /** clamp(floor(cores / 2), 1, 4); at most 2 with <= 4 GB of memory, 1 with <= 2 GB (phase 0 measurements). */
 export function defaultWorkerCount(nav: { hardwareConcurrency?: number; deviceMemory?: number } = navigator): number {
@@ -52,6 +54,8 @@ export class AnalysisPool extends EventTarget {
   private readyPromise: Promise<void>;
   /** Analysis options for files started from now on (the traditions setting). */
   options: AnalysisOptions = {};
+  /** Main-thread decodes run one at a time: each holds a whole decoded file in memory. */
+  private decoding: Promise<unknown> = Promise.resolve();
 
   constructor(opts: { workers?: number; modelUrl?: string } = {}) {
     super();
@@ -99,7 +103,11 @@ export class AnalysisPool extends EventTarget {
       if (job.status === 'queued') this.finish(job, { status: 'cancelled' });
       else if (job.status === 'running') {
         const slot = this.slots.find((s) => s.job === job);
-        slot?.worker.postMessage({ type: 'cancel', id: job.id } satisfies ToWorker);
+        if (!slot) continue;
+        slot.worker.postMessage({ type: 'cancel', id: job.id } satisfies ToWorker);
+        setTimeout(() => {
+          if (slot.job === job && this.slots.includes(slot)) this.replace(slot, { status: 'cancelled' });
+        }, CANCEL_GRACE_MS);
       }
     }
   }
@@ -192,22 +200,32 @@ export class AnalysisPool extends EventTarget {
     } else if (msg.type === 'error') {
       this.release(slot, job, msg.cancelled ? { status: 'cancelled' } : { status: 'error', error: msg.message });
     } else if (msg.type === 'needsMainDecode') {
+      const current = () => job.status === 'running' && slot.job === job && this.slots.includes(slot);
       try {
-        const { samples, sampleRate } = await decodeWhole(job.file);
+        const decoded = this.decoding.then(() => (current() ? decodeWhole(job.file) : null));
+        this.decoding = decoded.catch(() => undefined);
+        const pcm = await decoded;
+        if (!pcm || !current()) return; // cancelled meanwhile
+        const { samples, sampleRate } = pcm;
         slot.worker.postMessage({ type: 'analysePcm', id: job.id, samples, sampleRate, options: job.options } satisfies ToWorker, [samples.buffer]);
       } catch (err) {
-        this.release(slot, job, { status: 'error', error: `can't decode this file: ${(err as Error).message ?? err}` });
+        if (current()) this.release(slot, job, { status: 'error', error: `can't decode this file: ${(err as Error).message ?? err}` });
       }
     }
   }
 
   /** A worker died (for example out of memory): fail its file and start a fresh worker. */
   private onCrash(slot: Slot, message: string): void {
+    this.replace(slot, { status: 'error', error: `the analysis stopped unexpectedly${message ? ` (${message})` : ''}` });
+  }
+
+  /** Stops a worker, finishes its file with ``patch`` and starts a fresh worker in its place. */
+  private replace(slot: Slot, patch: Partial<Job>): void {
     const job = slot.job;
-    const replace = !slot.retiring;
+    const fresh = !slot.retiring;
     this.remove(slot);
-    if (job) this.finish(job, { status: 'error', error: `the analysis stopped unexpectedly${message ? ` (${message})` : ''}` });
-    if (replace) this.grow(1).catch((err) => this.dispatchEvent(new CustomEvent('error', { detail: err })));
+    if (job) this.finish(job, patch);
+    if (fresh) this.grow(1).catch((err) => this.dispatchEvent(new CustomEvent('error', { detail: err })));
   }
 
   private remove(slot: Slot): void {

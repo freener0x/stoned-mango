@@ -251,6 +251,14 @@ try {
   assert.deepEqual(requests, [], `network requests: ${requests.join(', ')}`);
   errors.splice(0); // the blocked request's console message
   console.log('no violations by the app; a request to another site is blocked by the browser');
+  // The policy is on "/" only, so the app must not run at any other address (Pages would serve it there
+  // without one if the site had no 404 page).
+  for (const path of ['does-not-exist', 'start/', 'assets/worker-missing.js', 'index.htm']) {
+    const r = await fetch(`${URL_}${path}`);
+    assert.equal(r.status, 404, path);
+    assert.ok(!(await r.text()).includes('type="module"'), `/${path} serves the app`);
+  }
+  console.log('other addresses get the 404 page, not the app');
 
   step('offline');
   console.log('controller before reload:', await page.evaluate(() => navigator.serviceWorker.controller?.state));

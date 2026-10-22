@@ -9,7 +9,7 @@ import type { Store } from '../store.ts';
 import { tagFile, toBlob, writeInPlace, type KeyTags, type Part } from './files.ts';
 import { TagError } from './id3.ts';
 import { isTaggable, keyTags } from './keys.ts';
-import { zip, ZIP_LIMIT } from './zip.ts';
+import { zip, ZIP_LIMIT, ZIP_MAX_ENTRIES } from './zip.ts';
 
 interface Plan {
   inPlace: number[];
@@ -109,11 +109,12 @@ export function useTagging(): { start(ids: number[]): void; dialog: ReactNode } 
       const c = copies[0];
       download(toBlob({ parts: c.parts, size: c.size, kind: /\.mp3$/i.test(c.name) ? 'mp3' : 'wav' }), c.name.split('/').pop()!);
     } else if (copies.length > 1) {
-      // Split into zips under 4 GB.
+      // Split into zips under 4 GB and 65,535 files.
       const groups: (typeof copies)[] = [[]];
       let size = 0;
       for (const c of copies) {
-        if (size + c.size > ZIP_LIMIT && groups[groups.length - 1].length) {
+        const last = groups[groups.length - 1];
+        if ((size + c.size > ZIP_LIMIT || last.length === ZIP_MAX_ENTRIES) && last.length) {
           groups.push([]);
           size = 0;
         }

@@ -212,6 +212,8 @@ test('zip: entry names can’t leave the folder, and duplicates get their own na
   assert.equal(entryName('../..'), 'file');
   const bytes = await blobBytes(await zip([{ name: 'Song.mp3', parts: [Uint8Array.of(1)] }, { name: 'song.mp3', parts: [Uint8Array.of(2)] },
     { name: 'Song.mp3', parts: [Uint8Array.of(3)] }]));
-  const names = [...new TextDecoder().decode(bytes).matchAll(/PK\x01\x02[\s\S]{42}([^\x00]*?\.mp3)/g)].map((m) => m[1]);
+  // Latin-1, one character per byte: read as UTF-8, the header's time and date bytes can merge into one
+  // character at some times of day, and the 42 bytes skipped below would then swallow the name's first letter.
+  const names = [...new TextDecoder('latin1').decode(bytes).matchAll(/PK\x01\x02[\s\S]{42}([^\x00]*?\.mp3)/g)].map((m) => m[1]);
   assert.deepEqual(names, ['Song.mp3', 'song (2).mp3', 'Song (3).mp3']);
 });

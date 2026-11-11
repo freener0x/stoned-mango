@@ -27,6 +27,11 @@ export function AboutPage({ offline }: { offline: boolean }) {
         and run their own copy: <a href="https://github.com/freener0x/stoned-mango" rel="noreferrer">source code</a>. It includes
         open-source libraries under their own licences: <a href={`${import.meta.env.BASE_URL}third-party-licenses.txt`}>third-party
         licences</a>.</p>
+
+      <h2>More from the maker</h2>
+      <p><a href="https://freener0x.github.io/MPE-Roll/" rel="noreferrer">MPE Roll</a>: a free, open-source MPE piano roll for
+        FL Studio. Load your synth inside it, and every note gets its own pitch glide, pressure and timbre. The link opens its
+        website; nothing from this page is sent with it.</p>
     </main>
   );
 }

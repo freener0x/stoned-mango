@@ -48,8 +48,8 @@ export function PrivacyPage() {
       <section>
         <h2>The fine print</h2>
         <p>Like any website, the host (Cloudflare Pages) sees that someone loaded the page: an IP address in its access logs. It
-          never sees your music, file names or results. Opening a donation link takes you to that payment site, under its own
-          privacy policy. You can also run stoned-mango yourself, fully offline, from the source code.</p>
+          never sees your music, file names or results. Opening a donation link takes you to that payment site, and the
+          About page’s links to GitHub and to MPE Roll’s website take you to those sites, each under its own privacy policy. You can also run stoned-mango yourself, fully offline, from the source code.</p>
       </section>
     </main>
   );
